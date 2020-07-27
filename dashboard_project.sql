@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 27 juil. 2020 à 08:57
+-- Généré le :  lun. 27 juil. 2020 à 13:39
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.4.0
 
@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `achat_materiel`;
 CREATE TABLE IF NOT EXISTS `achat_materiel` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `location` int(11) NOT NULL,
+  `location` int(11) DEFAULT NULL,
   `name_product` varchar(100) NOT NULL,
   `ref_product` varchar(20) NOT NULL,
   `categories` int(11) NOT NULL,
@@ -39,11 +39,13 @@ CREATE TABLE IF NOT EXISTS `achat_materiel` (
   `garanty_date` date NOT NULL,
   `price` float NOT NULL,
   `advice` varchar(256) DEFAULT NULL,
-  `picture` longblob NOT NULL,
-  `manual` blob DEFAULT NULL,
+  `picture` int(11) NOT NULL,
+  `manual` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `location` (`location`),
-  KEY `categories` (`categories`)
+  KEY `categories` (`categories`),
+  KEY `picture` (`picture`,`manual`),
+  KEY `manual` (`manual`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -54,9 +56,43 @@ CREATE TABLE IF NOT EXISTS `achat_materiel` (
 
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE IF NOT EXISTS `category` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  PRIMARY KEY (`ID`)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `category`
+--
+
+INSERT INTO `category` (`id`, `name`) VALUES
+(3, 'fzef'),
+(4, 'fdsf');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `manu`
+--
+
+DROP TABLE IF EXISTS `manu`;
+CREATE TABLE IF NOT EXISTS `manu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `manual` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `pic`
+--
+
+DROP TABLE IF EXISTS `pic`;
+CREATE TABLE IF NOT EXISTS `pic` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `picture` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -67,26 +103,31 @@ CREATE TABLE IF NOT EXISTS `category` (
 
 DROP TABLE IF EXISTS `sites`;
 CREATE TABLE IF NOT EXISTS `sites` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(256) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `sites`
+--
+
+INSERT INTO `sites` (`id`, `name`) VALUES
+(1, 'gefz'),
+(2, 'gez');
 
 --
 -- Contraintes pour les tables déchargées
 --
 
 --
--- Contraintes pour la table `category`
+-- Contraintes pour la table `achat_materiel`
 --
-ALTER TABLE `category`
-  ADD CONSTRAINT `category_ibfk_1` FOREIGN KEY (`ID`) REFERENCES `achat_materiel` (`categories`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `sites`
---
-ALTER TABLE `sites`
-  ADD CONSTRAINT `sites_ibfk_1` FOREIGN KEY (`ID`) REFERENCES `achat_materiel` (`location`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `achat_materiel`
+  ADD CONSTRAINT `achat_materiel_ibfk_1` FOREIGN KEY (`categories`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `achat_materiel_ibfk_2` FOREIGN KEY (`location`) REFERENCES `sites` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `achat_materiel_ibfk_3` FOREIGN KEY (`picture`) REFERENCES `pic` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `achat_materiel_ibfk_4` FOREIGN KEY (`manual`) REFERENCES `manu` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
