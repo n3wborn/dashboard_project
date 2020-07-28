@@ -5,5 +5,6 @@ $sql= 'SELECT * FROM category';
     $sth->execute();
     $result= $sth->fetchAll(PDO::FETCH_ASSOC);
     print_r($result);
+
 ?>
 
