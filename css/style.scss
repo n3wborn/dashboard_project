@@ -95,6 +95,7 @@ header {
 		@include font;
 		@include container;
 		background-color: $grisClair;
+		padding: 1rem;
 
 
 		ul {
@@ -112,4 +113,9 @@ body {
 }
 
 
-
+main {
+	div {
+		@include container;
+		background-color: $grisClair;
+	}
+}

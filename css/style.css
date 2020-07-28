@@ -60,6 +60,7 @@ header nav {
   margin-left: 20%;
   margin-right: 20%;
   background-color: #DFE6E9;
+  padding: 1rem;
 }
 header nav ul {
   display: flex;
@@ -74,6 +75,16 @@ body {
   font-size: 1.2rem;
   line-height: 1.5;
   color: #363a46;
+}
+
+main div {
+  max-width: 1140px;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 20%;
+  margin-right: 20%;
+  background-color: #DFE6E9;
 }
 
 /*# sourceMappingURL=style.css.map */

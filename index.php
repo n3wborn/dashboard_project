@@ -12,8 +12,26 @@ $sql= 'SELECT `ID`,`location`,`name_product`,`ref_product`,`categories`,`purchas
     if (count($result)===0){
         echo'<p>Rien n\'a encore été rempli</p>';
     }
-    
 
 
-?>
+
+
+/* Twig Vars to render */
+$project_title = 'Dashboard Project';
+
+
+
+/* TWIG CONF */
+require_once 'vendor/autoload.php';
+
+$loader = new \Twig\Loader\FilesystemLoader('templates');
+$twig = new \Twig\Environment($loader, [
+    'cache' => false,
+]);
+
+
+/* TWIG: LOAD AND RENDER */
+$template = $twig->load('header-nav.html');
+echo $template->render(['project_title' => $project_title]);
+
 
