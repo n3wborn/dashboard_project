@@ -85,6 +85,6 @@ if ( count($_POST) > 0){
         $error = true;
     }
 
-    $sql = "INSERT INTO achat_materiel(location, name_product, ref_product, categories, purchase_date, guarantee_date, price, advice, picture, manual) VALUES(:location, :name_product, :ref_product, :categories, :purchase_date, :guarantee_date, :price, :advice, :picture, :manual)";
+
 
 }
