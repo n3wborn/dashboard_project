@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <link rel="stylesheet" href="../fonts/css/font-awesome.css">
+        <link rel="stylesheet" href="../css/style.css">
+        <title>{% block title %}Titre Projet{% endblock title %}</title>
+    </head>
+
+    <body>
+        <header>
+            <nav>
+                <ul>
+                    <div>
+                        <li>
+                            <h1><a href="#" class="logo">{{ project_title }}</a></h1>
+                        </li>
+                    </div>
+                    <div>
+                        <li>
+                            <a  id="logout"  href="#"><i class="fa fa-sign-out fa-2x" aria-hidden="true"></i></a>
+                        </li>
+                    </div>
+
+                </ul>
+            </nav>
+        </header>
+
+
+        <main>
+        </main>
+
+
+        <footer>
+        </footer>
+
+    <script src="script.js"></script>
+    </body>
+</html>

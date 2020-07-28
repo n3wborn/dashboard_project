@@ -16,12 +16,13 @@ $sql= 'SELECT `ID`,`location`,`name_product`,`ref_product`,`categories`,`purchas
 
 
 
-/* Twig Vars to render */
+
+/* TWIG */
+/* Variables */
 $project_title = 'Dashboard Project';
 
 
-
-/* TWIG CONF */
+/* Conf */
 require_once 'vendor/autoload.php';
 
 $loader = new \Twig\Loader\FilesystemLoader('templates');
@@ -30,8 +31,6 @@ $twig = new \Twig\Environment($loader, [
 ]);
 
 
-/* TWIG: LOAD AND RENDER */
-$template = $twig->load('header-nav.html');
+/* Templates */
+$template = $twig->load('index.html');
 echo $template->render(['project_title' => $project_title]);
-
-
