@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
--- Host: mariadb
--- Generation Time: Jul 28, 2020 at 09:40 AM
--- Server version: 10.4.13-MariaDB-1:10.4.13+maria~focal
--- PHP Version: 7.4.6
+-- Hôte : 127.0.0.1:3306
+-- Généré le :  mar. 28 juil. 2020 à 15:28
+-- Version du serveur :  10.4.10-MariaDB
+-- Version de PHP :  7.4.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,17 +19,18 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `dashboard_project`
+-- Base de données :  `dashboard_project`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `achat_materiel`
+-- Structure de la table `achat_materiel`
 --
 
-CREATE TABLE `achat_materiel` (
-  `ID` int(11) NOT NULL,
+DROP TABLE IF EXISTS `achat_materiel`;
+CREATE TABLE IF NOT EXISTS `achat_materiel` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `location` int(11) NOT NULL,
   `name_product` varchar(100) NOT NULL,
   `ref_product` varchar(20) NOT NULL,
@@ -38,22 +40,29 @@ CREATE TABLE `achat_materiel` (
   `price` float NOT NULL,
   `advice` varchar(256) DEFAULT NULL,
   `picture` int(11) DEFAULT NULL,
-  `manual` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `manual` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `location` (`location`),
+  KEY `categories` (`categories`),
+  KEY `picture` (`picture`,`manual`),
+  KEY `manual` (`manual`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category`
+-- Structure de la table `category`
 --
 
-CREATE TABLE `category` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE IF NOT EXISTS `category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `category`
+-- Déchargement des données de la table `category`
 --
 
 INSERT INTO `category` (`id`, `name`) VALUES
@@ -65,38 +74,60 @@ INSERT INTO `category` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `manu`
+-- Structure de la table `manu`
 --
 
-CREATE TABLE `manu` (
-  `id` int(11) NOT NULL,
-  `manual` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `manu`;
+CREATE TABLE IF NOT EXISTS `manu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `manual` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `manu`
+--
+
+INSERT INTO `manu` (`id`, `manual`) VALUES
+(1, 'medias/manuel1.pdf'),
+(2, 'medias/manuel2.pdf');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pic`
+-- Structure de la table `pic`
 --
 
-CREATE TABLE `pic` (
-  `id` int(11) NOT NULL,
-  `picture` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `pic`;
+CREATE TABLE IF NOT EXISTS `pic` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `picture` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `pic`
+--
+
+INSERT INTO `pic` (`id`, `picture`) VALUES
+(1, 'medias/ticket1.png'),
+(2, 'medias/ticket2.png');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sites`
+-- Structure de la table `sites`
 --
 
-CREATE TABLE `sites` (
-  `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `sites`;
+CREATE TABLE IF NOT EXISTS `sites` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `sites`
+-- Déchargement des données de la table `sites`
 --
 
 INSERT INTO `sites` (`id`, `name`) VALUES
@@ -109,83 +140,11 @@ INSERT INTO `sites` (`id`, `name`) VALUES
 (7, 'https://www.veepee.fr/');
 
 --
--- Indexes for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Indexes for table `achat_materiel`
---
-ALTER TABLE `achat_materiel`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `location` (`location`),
-  ADD KEY `categories` (`categories`),
-  ADD KEY `picture` (`picture`,`manual`),
-  ADD KEY `manual` (`manual`);
-
---
--- Indexes for table `category`
---
-ALTER TABLE `category`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `manu`
---
-ALTER TABLE `manu`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `pic`
---
-ALTER TABLE `pic`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `sites`
---
-ALTER TABLE `sites`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `achat_materiel`
---
-ALTER TABLE `achat_materiel`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `category`
---
-ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `manu`
---
-ALTER TABLE `manu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `pic`
---
-ALTER TABLE `pic`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `sites`
---
-ALTER TABLE `sites`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `achat_materiel`
+-- Contraintes pour la table `achat_materiel`
 --
 ALTER TABLE `achat_materiel`
   ADD CONSTRAINT `achat_materiel_ibfk_1` FOREIGN KEY (`categories`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
