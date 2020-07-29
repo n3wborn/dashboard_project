@@ -2,27 +2,39 @@
 
 {% block title %}Dashboard Project{% endblock title %}
 
-            {% block main %}
-            <table>
-                <thead>
-                    <tr>
-                        <th>Col 1</th>
-                        <th>Col 2</th>
-                        <th>Col 3</th>
-                        <th>Col 4</th>
-                        <th>Col 5</th>
-                        <th>Col 6</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>TEST</td>
-                        <td>TEST</td>
-                        <td>TEST</td>
-                        <td>TEST</td>
-                        <td>TEST</td>
-                        <td>TEST</td>
-                    </tr>
-                </tbody>
-            </table>
-            {% endblock main %}
+{% block main %}
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Site</th>
+				<th>Produit</th>
+				<th>Reference</th>
+				<th>Category</th>
+				<th>Date</th>
+				<th>Garanty</th>
+				<th>Price</th>
+				<th>Advice</th>
+				<th>Picture</th>
+				<th>Manual</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for results in results %}
+				<tr>
+					<td>{{ results.ID }}</td>
+					<td>{{ results.location }}</td>
+					<td>{{ results.name_product }}</td>
+					<td>{{ results.ref_product }}</td>
+					<td>{{ results.categories }}</td>
+					<td>{{ results.purchase_date }}</td>
+					<td>{{ results.garanty_date }}</td>
+					<td>{{ results.price }} €</td>
+					<td>{{ results.advice }}</td>
+					<td>{{ results.picture }}</td>
+					<td>{{ results.manual }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock main %}

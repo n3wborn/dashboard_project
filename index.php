@@ -17,7 +17,7 @@ $sql= 'SELECT `ID`,`location`,`name_product`,`ref_product`,`categories`,`purchas
 /* TWIG */
 /* Variables */
 $project_title = 'Dashboard Project';
-
+$test = 'Is ok';
 
 /* Conf */
 require_once 'vendor/autoload.php';
@@ -30,4 +30,7 @@ $twig = new \Twig\Environment($loader, [
 
 /* Templates */
 $template = $twig->load('index.html');
-echo $template->render(['project_title' => $project_title]);
+echo $template->render([
+	'project_title' => $project_title,
+	'results' => $result
+]);
