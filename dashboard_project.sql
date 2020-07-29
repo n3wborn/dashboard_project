@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mer. 29 juil. 2020 à 08:05
+-- Généré le :  mer. 29 juil. 2020 à 09:50
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.4.0
 
@@ -85,6 +85,20 @@ INSERT INTO `category` (`id`, `name`) VALUES
 (8, 'cuisine'),
 (9, 'jardin'),
 (10, 'décoration');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `login`
+--
+
+DROP TABLE IF EXISTS `login`;
+CREATE TABLE IF NOT EXISTS `login` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(100) NOT NULL,
+  `password` varchar(60) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
