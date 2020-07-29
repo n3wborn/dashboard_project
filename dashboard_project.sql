@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 28 juil. 2020 à 15:28
+-- Généré le :  mer. 29 juil. 2020 à 08:05
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.4.0
 
@@ -46,7 +46,18 @@ CREATE TABLE IF NOT EXISTS `achat_materiel` (
   KEY `categories` (`categories`),
   KEY `picture` (`picture`,`manual`),
   KEY `manual` (`manual`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `achat_materiel`
+--
+
+INSERT INTO `achat_materiel` (`ID`, `location`, `name_product`, `ref_product`, `categories`, `purchase_date`, `garanty_date`, `price`, `advice`, `picture`, `manual`) VALUES
+(2, 1, 'fefdgdf', 'ff', 3, '2019-03-04', '2020-03-05', 56, 'fsfd', 1, 1),
+(3, 2, 'mixeur', '45UtZ', 3, '2019-03-04', '2020-03-05', 45, 'Ne pas mettre les doigts dedans', 1, 2),
+(4, 5, 'TV', 'AZ32P', 3, '2018-03-10', '2020-03-11', 450, 'Ne pas coller ses yeux à l\'écran', 2, 1),
+(5, 3, 'pof', 'AP325T', 4, '2019-07-11', '2020-07-11', 32, 'blablavla', 2, 1),
+(6, 3, 'gef', '34ZDT', 3, '2019-07-11', '2020-07-11', 329, 'blablavla', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -59,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `category`
@@ -69,7 +80,11 @@ INSERT INTO `category` (`id`, `name`) VALUES
 (3, 'electro-menager'),
 (4, 'vetements'),
 (5, 'vehicules'),
-(6, 'sport');
+(6, 'sport'),
+(7, 'animaux'),
+(8, 'cuisine'),
+(9, 'jardin'),
+(10, 'décoration');
 
 -- --------------------------------------------------------
 
