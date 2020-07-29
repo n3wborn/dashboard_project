@@ -1,12 +1,13 @@
-<?php require_once 'php/database.php' ?>
+<?php require_once 'database.php' ?>
 
 <?php 
+$id ='';
 $location = '';
 $name_product = '';
 $ref_product = '';
 $categories = '';
 $purchase_date = '';
-$guarantee_date = '';
+$garanty_date = '';
 $price = '';
 $advice = '';
 $picture = '';
@@ -50,8 +51,8 @@ if ( count($_POST) > 0){
         $error = true;
     }
     // guarantee date 
-    if (strlen(trim($_POST['guarantee_date']))!== 0){
-        $guarantee_date = trim($_POST['guarantee_date']);
+    if (strlen(trim($_POST['garanty_date']))!== 0){
+        $guarantee_date = trim($_POST['garanty_date']);
     }
     else{
         $error = true;
@@ -85,6 +86,29 @@ if ( count($_POST) > 0){
         $error = true;
     }
 
+    if( $error === false){
+        $sql = "INSERT INTO `achat_materiel`( `location`, `name_product`, `ref_product`, `categories`, `purchase_date`, `garanty_date`, `price`, `advice`, `picture`, `manual`) VALUES (:location, :name_product, :ref_product, :categories, :purchase_date, :garanty_date, :price, :advice, :picture, :manual )";
+    }
+    $sth = $dbh->prepare($sql);
+    $sth->bindParam(':location', $location, PDO::PARAM_STR);
+    $sth->bindParam(':name_product', $name_product, PDO::PARAM_STR);
+    $sth->bindParam(':ref_product', $ref_product, PDO::PARAM_STR);
+    $sth->bindParam(':categories', $categories, PDO::PARAM_STR);
+    $sth->bindValue(':purchase_date', strftime("%Y-%m-%d", strtotime($purchase_date)), PDO::PARAM_STR);
+    $sth->bindValue(':garanty_date', strftime("%Y-%m-%d", strtotime($garanty_date)), PDO::PARAM_STR);
+    $sth->bindParam(':price', $price, PDO::PARAM_STR);
+    $sth->bindParam(':advice', $advice, PDO::PARAM_STR);
+    $sth->bindParam(':picture', $picture, PDO::PARAM_STR);
+    $sth->bindParam(':manual', $manual, PDO::PARAM_STR);
 
 
+
+    // execute
+    $sth->execute();
+    
+    
+    // Redirection après insertion
+    header('Location: index.php');
 }
+?>
+
