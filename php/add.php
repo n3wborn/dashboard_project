@@ -108,7 +108,7 @@ if ( count($_POST) > 0){
     
     
     // Redirection après insertion
-    header('Location: index.php');
+    header('Location: ../index.php');
 }
 ?>
 
