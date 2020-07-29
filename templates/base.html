@@ -22,13 +22,36 @@
                             <a  id="logout"  href="#"><i class="fa fa-sign-out fa-2x" aria-hidden="true"></i></a>
                         </li>
                     </div>
-
                 </ul>
             </nav>
         </header>
 
 
         <main>
+            {% block main %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Col 1</th>
+                        <th>Col 2</th>
+                        <th>Col 3</th>
+                        <th>Col 4</th>
+                        <th>Col 5</th>
+                        <th>Col 6</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>DONNEES</td>
+                        <td>DONNEES</td>
+                        <td>DONNEES</td>
+                        <td>DONNEES</td>
+                        <td>DONNEES</td>
+                        <td>DONNEES</td>
+                    </tr>
+                </tbody>
+            </table>
+            {% endblock main %}
         </main>
 
 
