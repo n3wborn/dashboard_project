@@ -1,6 +1,10 @@
-<?php require_once 'database.php' ?>
+<?php require 'php/database.php';
+require_once "functions.php"; 
 
-<?php
+if (!connected()) {
+	header('Location: login.php');
+}
+
 $id ='';
 $location = '';
 $name_product = '';
