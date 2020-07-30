@@ -112,7 +112,7 @@ if ( count($_POST) > 0){
 
     if( $error === false){
         if( isset($_POST['edit'])){
-            $sql = 'UPDATE achat_materiel set location=:location, name_product=:name_product, ref_product=:ref_product, categories=:categories, purchase_date=:purchase_date, garanty_date=:garanty_date, price=:price, advice=:advice, picture=:picture, manual=:manual where id=:id';
+            $sql = 'UPDATE achat_materiel SET location=:location, name_product=:name_product, ref_product=:ref_product, categories=:categories, purchase_date=:purchase_date, garanty_date=:garanty_date, price=:price, advice=:advice, picture=:picture, manual=:manual WHERE id=:id';
         }
     
     $sth = $dbh->prepare($sql);
