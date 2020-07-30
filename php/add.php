@@ -1,6 +1,6 @@
 <?php require_once 'database.php' ?>
 
-<?php 
+<?php
 $id ='';
 $location = '';
 $name_product = '';
@@ -50,7 +50,7 @@ if ( count($_POST) > 0){
     else{
         $error = true;
     }
-    // guarantee date 
+    // guarantee date
     if (strlen(trim($_POST['garanty_date']))!== 0){
         $guarantee_date = trim($_POST['garanty_date']);
     }
@@ -105,10 +105,34 @@ if ( count($_POST) > 0){
 
     // execute
     $sth->execute();
-    
-    
+
+
     // Redirection après insertion
     header('Location: ../index.php');
 }
-?>
 
+
+
+
+
+/* TWIG */
+/* Variables */
+$project_title = 'Dashboard Project';
+
+
+/* Conf */
+require_once '../vendor/autoload.php';
+
+$loader = new \Twig\Loader\FilesystemLoader('../templates');
+$twig = new \Twig\Environment($loader, [
+    'cache' => false,
+]);
+
+
+/* Templates */
+$template = $twig->load('edit-add.html');
+echo $template->render([
+    'project_title' => $project_title,
+]);
+
+?>
