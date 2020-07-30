@@ -1,7 +1,10 @@
 <?php require 'php/database.php';
 
-$sql= 'SELECT `ID`,`location`,`name_product`,`ref_product`,`categories`,`purchase_date`,`garanty_date`,`price`,`advice`,`picture`,`manual` FROM `achat_materiel` ';
+
+
+$sql= 'SELECT achat_materiel.ID, location, name_product, ref_product, c.name AS name, purchase_date, garanty_date, price, advice, picture, manual FROM achat_materiel INNER JOIN category AS c ON achat_materiel.categories=c.id' ;
     $sth= $dbh->prepare($sql);
+
     $sth->execute();
     $result= $sth->fetchAll(PDO::FETCH_ASSOC);
     $intlDateFormatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::SHORT, IntlDateFormatter::NONE);
