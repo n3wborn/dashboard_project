@@ -1,5 +1,5 @@
 <?php require 'php/database.php';
-require_once "functions.php"; 
+require_once "php/functions.php"; 
 
 if (!connected()) {
 	header('Location: login.php');
