@@ -2,7 +2,7 @@
 
 
 
-$sql= 'SELECT achat_materiel.ID, location, name_product, ref_product, c.name AS name, purchase_date, garanty_date, price, advice, picture, manual FROM achat_materiel INNER JOIN category AS c ON achat_materiel.categories=c.id' ;
+$sql= 'SELECT achat_materiel.ID,location,name_product,ref_product,c.name AS name,purchase_date,garanty_date,price,advice,`picture`,`manual` FROM achat_materiel INNER JOIN category AS c ON achat_materiel.categories=c.id' ;
     $sth= $dbh->prepare($sql);
 
     $sth->execute();
