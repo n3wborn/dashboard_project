@@ -1,5 +1,9 @@
-<?php require_once 'database.php'
+<?php require 'php/database.php';
+require_once "functions.php"; 
 
+if (!connected()) {
+	header('Location: login.php');
+}
 if(isset($_POST['id'])){
     $sql=' DELETE FROM achat_materiel WHERE id=:id '
     $sth = $dbh->prepare($sql);

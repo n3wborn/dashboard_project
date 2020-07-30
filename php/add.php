@@ -1,4 +1,9 @@
-<?php require_once 'database.php' ?>
+<?php require 'php/database.php';
+require_once "functions.php"; 
+
+if (!connected()) {
+	header('Location: login.php');
+}
 
 <?php 
 $id ='';
@@ -89,6 +94,7 @@ if ( count($_POST) > 0){
     if( $error === false){
         $sql = "INSERT INTO `achat_materiel`( `location`, `name_product`, `ref_product`, `categories`, `purchase_date`, `garanty_date`, `price`, `advice`, `picture`, `manual`) VALUES (:location, :name_product, :ref_product, :categories, :purchase_date, :garanty_date, :price, :advice, :picture, :manual )";
     }
+    
     $sth = $dbh->prepare($sql);
     $sth->bindParam(':location', $location, PDO::PARAM_STR);
     $sth->bindParam(':name_product', $name_product, PDO::PARAM_STR);
