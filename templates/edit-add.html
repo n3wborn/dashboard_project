@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}{% endblock title %}
+
+{% block main %}
+
+<div>
+
+	<form id="edit-add-form" action="" method="post">
+
+		<label for="name_product"></label>
+		<input type="text" name="name_product" class="form-input" value="" required>
+
+		<label for="ref_product"></label>
+		<input type="text" name="ref_product" class="form-input" value="" required>
+
+		<label for="location"></label>
+		<input type="text" name="location" class="form-input" value="" required>
+
+		<label for="price"></label>
+		<input type="text" name="price" class="form-input" value="" required>
+
+		<label for="categories"></label>
+		<input type="text" name="categories" class="form-input" value="" required>
+
+		<label for="purchase_date"></label>
+		<input type="date" name="purchase_date" class="form-input" value="" required>
+
+		<label for="garanty_date"></label>
+		<input type="date" name="garanty_date" class="form-input" value="" required>
+
+		<label for="advice"></label>
+		<input type="text" name="advice" class="form-input" value="">
+
+		<button id="edit-btn" type="submit" class="btn btn-primary">Edit</button>
+
+	</form>
+</div>
+
+{% endblock main %}
