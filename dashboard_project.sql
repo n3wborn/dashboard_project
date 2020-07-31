@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mer. 29 juil. 2020 à 09:50
+-- Généré le :  ven. 31 juil. 2020 à 09:31
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.4.0
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `achat_materiel` (
   KEY `categories` (`categories`),
   KEY `picture` (`picture`,`manual`),
   KEY `manual` (`manual`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `achat_materiel`
@@ -57,7 +57,8 @@ INSERT INTO `achat_materiel` (`ID`, `location`, `name_product`, `ref_product`, `
 (3, 2, 'mixeur', '45UtZ', 3, '2019-03-04', '2020-03-05', 45, 'Ne pas mettre les doigts dedans', 1, 2),
 (4, 5, 'TV', 'AZ32P', 3, '2018-03-10', '2020-03-11', 450, 'Ne pas coller ses yeux à l\'écran', 2, 1),
 (5, 3, 'pof', 'AP325T', 4, '2019-07-11', '2020-07-11', 32, 'blablavla', 2, 1),
-(6, 3, 'gef', '34ZDT', 3, '2019-07-11', '2020-07-11', 329, 'blablavla', 2, 1);
+(6, 3, 'gef', '34ZDT', 3, '2019-07-11', '2020-07-11', 329, 'blablavla', 2, 1),
+(7, 8, 'Autruche', 'PET547', 7, '2020-07-01', '2027-07-01', 530, 'Eviter de la lancer d\'un immeuble pour la voir, voler ...', 3, 3);
 
 -- --------------------------------------------------------
 
@@ -77,14 +78,14 @@ CREATE TABLE IF NOT EXISTS `category` (
 --
 
 INSERT INTO `category` (`id`, `name`) VALUES
-(3, 'electro-menager'),
-(4, 'vetements'),
-(5, 'vehicules'),
-(6, 'sport'),
-(7, 'animaux'),
-(8, 'cuisine'),
-(9, 'jardin'),
-(10, 'décoration');
+(3, 'Appliances'),
+(4, 'Clothes'),
+(5, 'Vehicles'),
+(6, 'Sport'),
+(7, 'Animals'),
+(8, 'Home & Kitchen'),
+(9, 'Outdoors'),
+(10, 'Decoration');
 
 -- --------------------------------------------------------
 
@@ -98,7 +99,15 @@ CREATE TABLE IF NOT EXISTS `login` (
   `user` varchar(100) NOT NULL,
   `password` varchar(60) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `login`
+--
+
+INSERT INTO `login` (`id`, `user`, `password`) VALUES
+(1, 'steph', '$2y$10$sQfDMujXbG6uqiFoxplpEupLpCPxccgx46nNZq7LEknQxV66edwgS'),
+(2, 'lea', '$2y$10$0ceYF9oGxQOnGDm2F2u6ce7R2w3AA9R1Qa/8JAjYe4EBXh6YRVSY2');
 
 -- --------------------------------------------------------
 
@@ -111,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `manu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `manual` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `manu`
@@ -119,7 +128,8 @@ CREATE TABLE IF NOT EXISTS `manu` (
 
 INSERT INTO `manu` (`id`, `manual`) VALUES
 (1, 'medias/manuel1.pdf'),
-(2, 'medias/manuel2.pdf');
+(2, 'medias/manuel2.pdf'),
+(3, 'medias/manuel3.pdf');
 
 -- --------------------------------------------------------
 
@@ -132,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `pic` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `picture` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `pic`
@@ -140,7 +150,8 @@ CREATE TABLE IF NOT EXISTS `pic` (
 
 INSERT INTO `pic` (`id`, `picture`) VALUES
 (1, 'medias/ticket1.png'),
-(2, 'medias/ticket2.png');
+(2, 'medias/ticket2.png'),
+(3, 'medias/autrche.jpg');
 
 -- --------------------------------------------------------
 
@@ -153,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `sites` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `sites`
@@ -166,7 +177,8 @@ INSERT INTO `sites` (`id`, `name`) VALUES
 (4, 'https://www.cdiscount.com/'),
 (5, 'https://www.amazon.fr/'),
 (6, 'https://www.zalando.fr/'),
-(7, 'https://www.veepee.fr/');
+(7, 'https://www.veepee.fr/'),
+(8, 'Vesoul');
 
 --
 -- Contraintes pour les tables déchargées
