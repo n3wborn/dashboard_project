@@ -1,8 +1,8 @@
-<?php require_once 'database.php';
-require_once "functions.php"; 
+<?php require_once 'php/database.php';
+require_once "php/functions.php"; 
 
 if (!connected()) {
-	header('Location: login.php');
+	header('Location: ./login.php');
 }
 if(isset($_POST['id'])){
     $sql=' DELETE FROM achat_materiel WHERE id=:id '
@@ -11,5 +11,5 @@ if(isset($_POST['id'])){
     $sth -> execute();
 }
 
-header('Location: ../index.php');
+header('Location: ./index.php');
 ?>

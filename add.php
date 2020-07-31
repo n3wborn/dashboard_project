@@ -1,8 +1,8 @@
-<?php require_once 'database.php';
-require_once "functions.php"; 
+<?php require_once 'php/database.php';
+require_once "php/functions.php"; 
 
 if (!connected()) {
-	header('Location: login.php');
+	header('Location: ./login.php');
 }
 
 
@@ -114,7 +114,7 @@ if ( count($_POST) > 0){
 
 
     // Redirection après insertion
-    header('Location: ../index.php');
+    header('Location: ./index.php');
 }
 
 

@@ -1,9 +1,9 @@
-<?php require_once 'database.php';
-require_once "functions.php"; 
+<?php require_once 'php/database.php';
+require_once "php/functions.php"; 
 
-// if (!connected()) {
-// 	header('Location: login.php');
-// }
+if (!connected()) {
+	header('Location: ./login.php');
+}
 
 $id ='';
 $location = '';
@@ -128,7 +128,7 @@ if ( count($_POST) > 0){
             $extensionUpload = strtolower(substr(strrchr($file, '.'), 1));
             if(in_array($extensionUpload, $extensionValide))
             {
-                $chemin = "medias/".$file;                $extensionUpload;
+                $chemin = "medias/".$file;                
                 $deplacement = move_uploaded_file($_FILES['picture']['tmp_name'], $chemin);
                 if($deplacement){
                     $update_pic= $dbh->prepare('UPDATE pic SET picture=:picture where id = :id');
@@ -174,7 +174,7 @@ if ( count($_POST) > 0){
     $sth->execute();
 
     // Redirection après insertion
-    header('Location: ../index.php');
+    header('Location: ./index.php');
 }
 }
 
