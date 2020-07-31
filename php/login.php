@@ -1,8 +1,8 @@
-<?php require 'php/database.php';
-require_once "php/functions.php"; 
+<?php require_once 'database.php';
+require_once "functions.php"; 
 
 if (connected()) {
-	header('Location: index.php');
+	header('Location: ../index.php');
 }
 
 if(count($_POST) > 0) {
@@ -16,14 +16,9 @@ if(count($_POST) > 0) {
     $result = $sth -> fetch();
     
 
-	if ($user === $result["user"]) {
-		if (pwd_verify($password, $result["password"])) {
-			if (!connected()) {
-
-				header('Location: login.php');
-			}
-		} else {
-			echo "Utilisateur ou mot de passe invalide";}
+	if ($user === $result["user"] && pwd_verify($password, $result["password"])) {
+		header('Location: ../index.php');
 	} else {
-		echo "Utilisateur ou mot de passe vide";}
-}
+		echo "Utilisateur ou mot de passe vide";
+	}
+	} 

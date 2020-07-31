@@ -1,4 +1,4 @@
-<?php require 'php/database.php';
+<?php require_once 'database.php';
 
 
 function pwd_verify(string $password , string $hash) : bool {
