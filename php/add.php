@@ -5,7 +5,7 @@ if (!connected()) {
 	header('Location: login.php');
 }
 
-<?php
+
 $id ='';
 $location = '';
 $name_product = '';

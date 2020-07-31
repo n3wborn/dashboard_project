@@ -44,8 +44,17 @@ if( isset($_GET['id'])){
 
 if ( count($_POST) > 0){
     // location
-    if (strlen(trim($_POST['location']))!== 0){
-        $location = trim($_POST['location']);
+    if (!empty($_POST['location'])){
+        if(strlen(trim($_POST['location']))== -1){
+            $location = trim($_POST['location']);
+            $req2= "INSERT INTO sites (name) VALUES (:location)";
+            $sth = $dbh->prepare($req2);
+            $sth->bindParam(':location', $location, PDO::PARAM_STR);
+            $sth->execute();
+            $location=$dbh->lastInsertId();
+        }else{
+            $location=trim($_POST['location']);
+        }
     }
     else{
         $error = true;
@@ -65,8 +74,17 @@ if ( count($_POST) > 0){
         $error = true;
     }
     // categories
-    if (strlen(trim($_POST['categories']))!== 0){
-        $categories = trim($_POST['categories']);
+    if (!empty($_POST['categories'])){
+        if(strlen(trim($_POST['categories']))== -1){
+            $location = trim($_POST['categories']);
+            $req3= "INSERT INTO cateogry (name) VALUES (:categories)";
+            $sth = $dbh->prepare($req3);
+            $sth->bindParam(':categories', $categories, PDO::PARAM_STR);
+            $sth->execute();
+            $categories=$dbh->lastInsertId();
+        }else{
+            $categories=trim($_POST['categories']);
+        }
     }
     else{
         $error = true;
