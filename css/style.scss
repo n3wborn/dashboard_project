@@ -128,13 +128,12 @@ main {
 	/* main's divs */
 	div {
 		@include container;
-
 	}
 
 	/* main's table */
 	table {
 		@include container;
-		margin: 5rem 10%;
+
 	  width: 80%;
 	  border-collapse: collapse;
 	  border: 1px solid $grisClair;
@@ -189,25 +188,33 @@ main {
 }
 
 
-@mixin form {
-	select,
-	input {
-		height: 1.5em;
-	  padding: .5rem 1rem;
-	  font-size: 1rem;
-	  line-height: 1.5;
-	  border-radius: .3rem;
-	  margin-top: 20px;
+form {
+	@include flexCol;
+	@include font;
+	width: 80%;
+	input,
+	input[type="date"],
+	input[type="text"],
+	input[type="password"],
+	input[type="text"]:focus,
+	input[type="password"]:focus,
+	select {
+		font-size: 1rem;
+		line-height: 1.5;
+	  /* width: 25rem; */
+		margin-top: 10px;
+		margin-bottom: 20px;
+	  height: 40px;
+		padding: .5rem 1rem;
+		border-radius: .3rem;
 	}
 }
 
-#edit-add-form {
-	@include form;
-	@include flexCol;
-	width: 80%;
-	margin-left: 20%;
-	margin-right: 20%;
+select {
+	box-sizing: content-box;
+	appearance: none;
 }
+
 
 #edit-btn {
   display: block;
@@ -220,4 +227,7 @@ main {
   /* color: var(--c-first); */
   /* background-color: var(--c-fourth) */;
 }
+
+
+
 
