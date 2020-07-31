@@ -8,29 +8,39 @@
 
 	<form id="edit-add-form" action="" method="post">
 
-		<label for="name_product"></label>
-		<input type="text" name="name_product" class="form-input" value="" required>
+		<label for="name_product">Product</label>
+		<input type="text" name="name_product" class="form-input" placeholder="{{ datas.name_product }}" value="{{ datas.name_product }}" required>
 
-		<label for="ref_product"></label>
-		<input type="text" name="ref_product" class="form-input" value="" required>
+		<label for="ref_product">Reference</label>
+		<input type="text" name="ref_product" class="form-input" value="{{ datas.ref_product }}" required>
 
-		<label for="location"></label>
-		<input type="text" name="location" class="form-input" value="" required>
+		<label for="location">Site</label>
+		<input type="text" name="location" class="form-input" value="{{ datas.location }}" required>
 
-		<label for="price"></label>
-		<input type="text" name="price" class="form-input" value="" required>
+		<label for="price">Price</label>
+		<input type="text" name="price" class="form-input" value="{{ datas.price }}" required>
 
-		<label for="categories"></label>
-		<input type="text" name="categories" class="form-input" value="" required>
+		<label for="categories">Category</label>
+		<select  class="form-input" name="categories" value="{{ datas.categories }}">
+			<option value="3" selected>Electro-menager</option>
+			<option value="4">Vetements</option>
+			<option value="5">Vehicules</option>
+			<option value="6">Sport</option>
+			<option value="7">Animaux</option>
+			<option value="8">Cuisine</option>
+			<option value="9">Jardin</option>
+			<option value="10">Décoration</option>
+			<option value="-1">Other</option>
+		</select>
 
-		<label for="purchase_date"></label>
-		<input type="date" name="purchase_date" class="form-input" value="" required>
+		<label for="purchase_date">Date</label>
+		<input type="date" name="purchase_date" class="form-input" value="{{ datas.purchase_date }}" required>
 
-		<label for="garanty_date"></label>
-		<input type="date" name="garanty_date" class="form-input" value="" required>
+		<label for="garanty_date">End Warranty Date</label>
+		<input type="date" name="garanty_date" class="form-input" value="{{ datas.garanty_date }}" >
 
-		<label for="advice"></label>
-		<input type="text" name="advice" class="form-input" value="">
+		<label for="advice">Advice</label>
+		<input type="text" name="advice" class="form-input" value="{{ datas.advice }}">
 
 		<button id="edit-btn" type="submit" class="btn btn-primary">Edit</button>
 
