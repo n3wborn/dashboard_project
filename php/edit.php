@@ -1,9 +1,9 @@
 <?php require_once 'database.php';
 require_once "functions.php"; 
 
-if (!connected()) {
-	header('Location: login.php');
-}
+// if (!connected()) {
+// 	header('Location: login.php');
+// }
 
 $id ='';
 $location = '';
@@ -118,8 +118,25 @@ if ( count($_POST) > 0){
         $error = true;
     }
     // picture
-    if (strlen(trim($_POST['picture']))!== 0){
-        $picture = trim($_POST['picture']);
+    $file = $_FILES['picture']['name_pic'];
+    if(!isset($msg)){$msg="";}
+    if (isset($_FILES['picture'])AND !empty($file)){
+        $tailleMax= 2097152;
+        $extensionValide= array('jpg', 'jpeg', 'png', 'gif');
+            if($_FILES['picture']['size'] <= $tailleMax)
+            {
+            $extensionUpload = strtolower(substr(strrchr($file, '.'), 1));
+            if(in_array($extensionUpload, $extensionValide))
+            {
+                $chemin = "medias/".$file;                $extensionUpload;
+                $deplacement = move_uploaded_file($_FILES['picture']['tmp_name'], $chemin);
+                if($deplacement){
+                    $update_pic= $dbh->prepare('UPDATE pic SET picture=:picture where id = :id');
+                    $update_pic ->execute(array($chemin, $file));
+                }
+                }
+            }
+            echo"Images must be in the format : jpg, jpeg, gif, png";
     }
     else{
         $error = true;
