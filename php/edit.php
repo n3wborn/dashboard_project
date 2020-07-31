@@ -45,8 +45,13 @@ if( isset($_GET['id'])){
 if ( count($_POST) > 0){
     // location
     if (strlen(trim($_POST['location']))!== 0){
-        $location = trim($_POST['location']);
-    }
+        if(strlen(trim($_POST['location']))== -1){
+            $location = trim($_POST['location']);
+            $req2= "INSERT INTO sites (name) VALUES location=:location";
+            $sth = $dbh->prepare($req2);
+            $sth->bindParam(':location', $location, PDO::PARAM_STR);
+            $sth->execute();
+        }
     else{
         $error = true;
     }
