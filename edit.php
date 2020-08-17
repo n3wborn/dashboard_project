@@ -218,4 +218,4 @@ $template = $twig->load('edit-add.html');
 echo $template->render([
 	'project_title' => $project_title,
 	'datas' => $data
-]);
+]); 
