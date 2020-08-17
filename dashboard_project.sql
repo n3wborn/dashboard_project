@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 31 juil. 2020 à 09:31
+-- Généré le :  lun. 17 août 2020 à 08:28
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.4.0
 
@@ -58,7 +58,7 @@ INSERT INTO `achat_materiel` (`ID`, `location`, `name_product`, `ref_product`, `
 (4, 5, 'TV', 'AZ32P', 3, '2018-03-10', '2020-03-11', 450, 'Ne pas coller ses yeux à l\'écran', 2, 1),
 (5, 3, 'pof', 'AP325T', 4, '2019-07-11', '2020-07-11', 32, 'blablavla', 2, 1),
 (6, 3, 'gef', '34ZDT', 3, '2019-07-11', '2020-07-11', 329, 'blablavla', 2, 1),
-(7, 8, 'Autruche', 'PET547', 7, '2020-07-01', '2027-07-01', 530, 'Eviter de la lancer d\'un immeuble pour la voir, voler ...', 3, 3);
+(7, 8, 'Autruche', 'PET547', 7, '2020-07-01', '2027-07-01', 530, 'Eviter de la lancer d\'un immeuble pour la voir voler ...', 3, 3);
 
 -- --------------------------------------------------------
 
@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `pic` (
 INSERT INTO `pic` (`id`, `picture`) VALUES
 (1, 'medias/ticket1.png'),
 (2, 'medias/ticket2.png'),
-(3, 'medias/autrche.jpg');
+(3, 'medias/autruche.jpg');
 
 -- --------------------------------------------------------
 
