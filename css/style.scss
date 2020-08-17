@@ -207,11 +207,12 @@ form {
 	select {
 		font-size: 1rem;
 		line-height: 1.5;
-	  /* width: 25rem; */
+		/* width: 25rem; */
 		margin-top: 10px;
 		margin-bottom: 30px;
-	  height: 40px;
+		height: 40px;
 		padding: .5rem 1rem;
+		border: solid 1px $violetPale;
 		border-radius: .3rem;
 	}
 }
@@ -233,16 +234,17 @@ label {
 
 #edit-btn {
 	@include font;
-  font-weight: bold;
- 	display: inline-block;
+	font-weight: bold;
+	display: inline-block;
 	width: 100%;
-  margin-top: 10px;
+	min-height: 40px;
+	margin-top: 10px;
 	margin-bottom: 20px;
-  padding: .5rem;
+	padding: .5rem;
 	border: solid 1px $violetPale;
 	background-color: rgba(223, 230, 233, 1);
-  border-radius: .3rem;
-  cursor: pointer;
+	border-radius: .3rem;
+	cursor: pointer;
 }
 
 
