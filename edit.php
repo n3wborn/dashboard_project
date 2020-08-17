@@ -119,6 +119,8 @@ if ( count($_POST) > 0){
     }
     // picture
     $file = $_FILES['picture']['name_pic'];
+    
+    var_dump(base64_encode($file));
     if(!isset($msg)){$msg="";}
     if (isset($_FILES['picture'])&& !empty($file)){
         $tailleMax= 2097152;
@@ -136,14 +138,31 @@ if ( count($_POST) > 0){
                 }
                 }
             }
-            echo"Images must be in the format : jpg, jpeg, gif, png";
+            echo"Images must be in the format : .jpg, .jpeg, .gif, .png";
     }
     else{
         $error = true;
     }
     // manual
-    if (strlen(trim($_POST['manual']))!== 0){
-        $manual = trim($_POST['manual']);
+    $file = $_FILES['manual']['name_pic'];
+    if(!isset($msg)){$msg="";}
+    if (isset($_FILES['manual'])&& !empty($file)){
+        $tailleMax= 2097152;
+        $extensionValide= array('pdf', 'txt');
+            if($_FILES['manual']['size'] <= $tailleMax)
+            {
+            $extensionUpload = strtolower(substr(strrchr($file, '.'), 1));
+            if(in_array($extensionUpload, $extensionValide))
+            {
+                $chemin = "medias/".$file;                
+                $deplacement = move_uploaded_file($_FILES['manual']['tmp_name'], $chemin);
+                if($deplacement){
+                    $update_manu= $dbh->prepare('UPDATE manu SET manual=:manual where id = :id');
+                    $update_manu ->execute(array($chemin, $file));
+                }
+                }
+            }
+            echo"Files must be in the format : .pdf, .txt";
     }
     else{
         $error = true;
