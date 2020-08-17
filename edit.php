@@ -118,32 +118,65 @@ if ( count($_POST) > 0){
         $error = true;
     }
     // picture
-    $file = $_FILES['picture']['name_pic'];
+    $file = $_FILES['picture'];
+  // Get the image and convert into string 
+    $img = file_get_contents( 
+    ''); 
+      
+    // Encode the image string data into base64 
+    $data = base64_encode($img); 
+      
+    // Display the output 
+    echo $data; 
+
     if(!isset($msg)){$msg="";}
-    if (isset($_FILES['picture'])AND !empty($file)){
+    if (isset($_FILES['picture'])&& !empty($file)){
         $tailleMax= 2097152;
         $extensionValide= array('jpg', 'jpeg', 'png', 'gif');
             if($_FILES['picture']['size'] <= $tailleMax)
+            {
+            $extensionUpload = strtolower(substr(strrchr($file['name'], '.'), 1));
+            if(in_array($extensionUpload, $extensionValide))
+            {
+                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$file['name'];              
+                $deplacement = move_uploaded_file($_FILES['picture']['tmp_name'], $chemin);
+                echo "<pre>"; print_r($_FILES); echo "</pre>"; die();
+
+                if($deplacement){
+                    $update_pic = $dbh->prepare('UPDATE pic SET picture=:picture where id = :id');
+                    $update_pic->bindParam(':picture', $chemin, PDO::PARAM_STR);
+                    $update_pic->bindParam(':id', $_GET['id'], PDO::PARAM_STR);
+                    $update_pic->execute();
+                }
+                }
+            }
+            echo "Images must be in the format : .jpg, .jpeg, .gif, .png";
+    }
+    else{
+        $error = true;
+    }
+
+
+    // manual
+    $file = $_FILES['manual']['name_pic'];
+    if(!isset($msg)){$msg="";}
+    if (isset($_FILES['manual'])&& !empty($file)){
+        $tailleMax= 2097152;
+        $extensionValide= array('pdf', 'txt');
+            if($_FILES['manual']['size'] <= $tailleMax)
             {
             $extensionUpload = strtolower(substr(strrchr($file, '.'), 1));
             if(in_array($extensionUpload, $extensionValide))
             {
                 $chemin = "medias/".$file;                
-                $deplacement = move_uploaded_file($_FILES['picture']['tmp_name'], $chemin);
+                $deplacement = move_uploaded_file($_FILES['manual']['tmp_name'], $chemin);
                 if($deplacement){
-                    $update_pic= $dbh->prepare('UPDATE pic SET picture=:picture where id = :id');
-                    $update_pic ->execute(array($chemin, $file));
+                    $update_manu= $dbh->prepare('UPDATE manu SET manual=:manual where id = :id');
+                    $update_manu ->execute(array($chemin, $file));
                 }
                 }
             }
-            echo"Images must be in the format : jpg, jpeg, gif, png";
-    }
-    else{
-        $error = true;
-    }
-    // manual
-    if (strlen(trim($_POST['manual']))!== 0){
-        $manual = trim($_POST['manual']);
+            echo"Files must be in the format : .pdf, .txt";
     }
     else{
         $error = true;
@@ -199,4 +232,4 @@ $template = $twig->load('edit-add.html');
 echo $template->render([
 	'project_title' => $project_title,
 	'datas' => $data
-]);
+]); 
