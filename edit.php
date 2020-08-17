@@ -158,25 +158,29 @@ if ( count($_POST) > 0){
 
 
     // manual
-    $file = $_FILES['manual']['name_pic'];
+    $fileMan = $_FILES['manual'];
     if(!isset($msg)){$msg="";}
-    if (isset($_FILES['manual'])&& !empty($file)){
+    if (isset($_FILES['manual'])&& !empty($fileMan)){
         $tailleMax= 2097152;
         $extensionValide= array('pdf', 'txt');
             if($_FILES['manual']['size'] <= $tailleMax)
             {
-            $extensionUpload = strtolower(substr(strrchr($file, '.'), 1));
+            $extensionUpload = strtolower(substr(strrchr($fileMan['name'], '.'), 1));
             if(in_array($extensionUpload, $extensionValide))
             {
-                $chemin = "medias/".$file;                
+                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$fileMan['name'];              
                 $deplacement = move_uploaded_file($_FILES['manual']['tmp_name'], $chemin);
+                echo "<pre>"; print_r($_FILES); echo "</pre>"; die();
+
                 if($deplacement){
-                    $update_manu= $dbh->prepare('UPDATE manu SET manual=:manual where id = :id');
-                    $update_manu ->execute(array($chemin, $file));
+                    $update_manual= $dbh->prepare('UPDATE manu SET manual=:manual where id = :id');
+                    $update_manual->bindParam(':manual', $chemin, PDO::PARAM_STR);
+                    $update_manual->bindParam(':id', $_GET['id'], PDO::PARAM_STR);
+                    $update_manual->execute();
                 }
                 }
             }
-            echo"Files must be in the format : .pdf, .txt";
+            echo "Files must be in the format : .pdf, .txt";
     }
     else{
         $error = true;
