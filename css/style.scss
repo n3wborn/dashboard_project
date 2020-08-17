@@ -35,10 +35,9 @@ a, a:visited {text-decoration:none; color: rgba(54, 58, 70, 1);}
 /* COLORS */
 $grisClair: #DFE6E9;
 $violetPale: #A29BFE;
-$bleuElectrique: #0984E3;
 $vertClair: #81ECEC;
 $vertFonce: #00B894;
-
+$vertLea: #007ea7;
 
 /* FONTS */
 @mixin font {
@@ -145,7 +144,7 @@ main {
 
 			th {
 				vertical-align: middle;
-				color: $bleuElectrique;
+				color: $vertLea;
 				font-weight: bold;
 				padding: 0.75rem;
 			}
@@ -212,7 +211,7 @@ form {
 		margin-bottom: 30px;
 		height: 40px;
 		padding: .5rem 1rem;
-		border: solid 1px $violetPale;
+		border: solid 1px $vertLea;
 		border-radius: .3rem;
 	}
 }
@@ -241,7 +240,7 @@ label {
 	margin-top: 10px;
 	margin-bottom: 20px;
 	padding: .5rem;
-	border: solid 1px $violetPale;
+	border: solid 1px $vertLea;
 	background-color: rgba(223, 230, 233, 1);
 	border-radius: .3rem;
 	cursor: pointer;
