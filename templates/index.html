@@ -35,8 +35,8 @@
 					<td>{{ results.advice }}</td>
 					<td>{{ results.picture }}</td>
 					<td>{{ results.manual }}</td>
-					<td><a class="editLinks" id="editLink_{{ results.ID }}"  href="php/edit.php?id={{ results.ID }}"><span class="fa fa-edit"></span></a></td>
-					<td><a class="dellinks" id="delete_{{ results.ID }}" href="php/delete.php?id={{ results.ID }}"><span class="fa fa-trash"></span></a></td>
+					<td><a class="editLinks" id="editLink_{{ results.ID }}"  href="edit.php?id={{ results.ID }}"><span class="fa fa-edit"></span></a></td>
+					<td><a class="dellinks" id="delete_{{ results.ID }}" href="delete.php?id={{ results.ID }}"><span class="fa fa-trash"></span></a></td>
 				</tr>
 			{% endfor %}
 		</tbody>
