@@ -120,7 +120,7 @@ if ( count($_POST) > 0){
     // picture
     $file = $_FILES['picture']['name_pic'];
     if(!isset($msg)){$msg="";}
-    if (isset($_FILES['picture'])AND !empty($file)){
+    if (isset($_FILES['picture'])&& !empty($file)){
         $tailleMax= 2097152;
         $extensionValide= array('jpg', 'jpeg', 'png', 'gif');
             if($_FILES['picture']['size'] <= $tailleMax)
