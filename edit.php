@@ -119,12 +119,16 @@ if ( count($_POST) > 0){
     }
     // picture
     $file = $_FILES['picture'];
-  
-// Get the image and convert into string 
-$file = file_get_contents('tmp_name'); 
-  $data = base64_encode($file); 
-  echo $data; 
-    
+  // Get the image and convert into string 
+    $img = file_get_contents( 
+    ''); 
+      
+    // Encode the image string data into base64 
+    $data = base64_encode($img); 
+      
+    // Display the output 
+    echo $data; 
+
     if(!isset($msg)){$msg="";}
     if (isset($_FILES['picture'])&& !empty($file)){
         $tailleMax= 2097152;
