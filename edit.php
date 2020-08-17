@@ -1,9 +1,9 @@
 <?php require_once 'php/database.php';
-require_once "php/functions.php"; 
+require_once "php/functions.php";
 
-if (!connected()) {
+/*if (!connected()) {
 	header('Location: ./login.php');
-}
+}*/
 
 $id ='';
 $location = '';
@@ -186,9 +186,9 @@ if ( count($_POST) > 0){
 $project_title = 'Dashboard Project';
 
 /* Conf */
-require_once '../vendor/autoload.php';
+require_once 'vendor/autoload.php';
 
-$loader = new \Twig\Loader\FilesystemLoader('../templates');
+$loader = new \Twig\Loader\FilesystemLoader('templates');
 $twig = new \Twig\Environment($loader, [
     'cache' => false,
 ]);
