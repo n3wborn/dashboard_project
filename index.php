@@ -5,7 +5,7 @@ require_once "php/functions.php";
 // 	header('Location: php/login.php');
 // }
 
-$sql= 'SELECT achat_materiel.ID, s.name AS place , name_product,ref_product,c.name AS name,purchase_date,garanty_date,price,advice,`picture`,`manual` FROM achat_materiel INNER JOIN category AS c ON achat_materiel.categories=c.id INNER JOIN sites AS s ON achat_materiel.location=s.id';
+$sql= 'SELECT achat_materiel.ID, s.name AS place , name_product,ref_product,c.name AS name,purchase_date,garanty_date,price,advice,picture,manual FROM achat_materiel INNER JOIN category AS c ON achat_materiel.categories=c.id INNER JOIN sites AS s ON achat_materiel.location=s.id';
 
     $sth= $dbh->prepare($sql);
     
