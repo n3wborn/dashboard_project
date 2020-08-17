@@ -118,31 +118,41 @@ if ( count($_POST) > 0){
         $error = true;
     }
     // picture
-    $file = $_FILES['picture']['name_pic'];
+    $file = $_FILES['picture'];
+  
+// Get the image and convert into string 
+$file = file_get_contents('tmp_name'); 
+  $data = base64_encode($file); 
+  echo $data; 
     
-    var_dump(base64_encode($file));
     if(!isset($msg)){$msg="";}
     if (isset($_FILES['picture'])&& !empty($file)){
         $tailleMax= 2097152;
         $extensionValide= array('jpg', 'jpeg', 'png', 'gif');
             if($_FILES['picture']['size'] <= $tailleMax)
             {
-            $extensionUpload = strtolower(substr(strrchr($file, '.'), 1));
+            $extensionUpload = strtolower(substr(strrchr($file['name'], '.'), 1));
             if(in_array($extensionUpload, $extensionValide))
             {
-                $chemin = "medias/".$file;                
+                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$file['name'];              
                 $deplacement = move_uploaded_file($_FILES['picture']['tmp_name'], $chemin);
+                echo "<pre>"; print_r($_FILES); echo "</pre>"; die();
+
                 if($deplacement){
-                    $update_pic= $dbh->prepare('UPDATE pic SET picture=:picture where id = :id');
-                    $update_pic ->execute(array($chemin, $file));
+                    $update_pic = $dbh->prepare('UPDATE pic SET picture=:picture where id = :id');
+                    $update_pic->bindParam(':picture', $chemin, PDO::PARAM_STR);
+                    $update_pic->bindParam(':id', $_GET['id'], PDO::PARAM_STR);
+                    $update_pic->execute();
                 }
                 }
             }
-            echo"Images must be in the format : .jpg, .jpeg, .gif, .png";
+            echo "Images must be in the format : .jpg, .jpeg, .gif, .png";
     }
     else{
         $error = true;
     }
+
+
     // manual
     $file = $_FILES['manual']['name_pic'];
     if(!isset($msg)){$msg="";}
