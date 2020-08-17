@@ -49,12 +49,12 @@ $vertFonce: #00B894;
 }
 
 /* widths / heights */
-$maxwidth: 1140px;
+$maxwidth: 1540px;
 $col: calc($max-width / 12);
 
 /* CONTAINERS */
 @mixin container {
-	max-width: 1140px;
+	max-width: 1540px;
 	width: 100%;
 	padding-left: 0;
 	padding-right: 0;
@@ -132,9 +132,10 @@ main {
 
 	/* main's table */
 	table {
-		@include container;
+	  /* width: 80%; */
+	  max-width: 1540px;
+		margin: 100px 10%;
 
-	  width: 80%;
 	  border-collapse: collapse;
 	  border: 1px solid $grisClair;
 
