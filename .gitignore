@@ -1,7 +1,7 @@
 vendor
 composer.lock
-css/css.map
-css/style.css
+style.css.map
+style.css
 
 
 
