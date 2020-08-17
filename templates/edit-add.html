@@ -4,7 +4,7 @@
 
 {% block main %}
 
-<div>
+<div id="form-container">
 
 	<form id="edit-add-form" action="" method="post">
 
@@ -42,7 +42,7 @@
 		<label for="advice">Advice</label>
 		<input type="text" name="advice" class="form-input" value="{{ datas.advice }}">
 
-		<button id="edit-btn" type="submit" class="btn btn-primary">Edit</button>
+		<button id="edit-btn" type="submit"><a href="edit.php">Edit</a></button>
 
 	</form>
 </div>

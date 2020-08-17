@@ -193,6 +193,11 @@ form {
 	@include flexCol;
 	@include font;
 	width: 80%;
+	max-width: 750px;
+	min-width: 400px;
+	padding-top: 100px;
+	padding-bottom: 100px ;
+
 	input,
 	input[type="date"],
 	input[type="text"],
@@ -202,11 +207,12 @@ form {
 	select {
 		font-size: 1rem;
 		line-height: 1.5;
-	  /* width: 25rem; */
+		/* width: 25rem; */
 		margin-top: 10px;
-		margin-bottom: 20px;
-	  height: 40px;
+		margin-bottom: 30px;
+		height: 40px;
 		padding: .5rem 1rem;
+		border: solid 1px $violetPale;
 		border-radius: .3rem;
 	}
 }
@@ -216,19 +222,33 @@ select {
 	appearance: none;
 }
 
+label {
+	@include font;
+  font-weight: bold;
+}
+
+#form-container {
+	@include flex;
+	@include flexCenter;
+}
 
 #edit-btn {
-  display: block;
-  font-weight: bold;
+	@include font;
+	font-weight: bold;
+	display: inline-block;
 	width: 100%;
-  border-color:rgba(220, 232, 245, 1);
-  padding: .5rem;
-  border-radius: .3rem;
-  cursor: pointer;
-  /* color: var(--c-first); */
-  /* background-color: var(--c-fourth) */;
+	min-height: 40px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	padding: .5rem;
+	border: solid 1px $violetPale;
+	background-color: rgba(223, 230, 233, 1);
+	border-radius: .3rem;
+	cursor: pointer;
 }
 
 
-
+#edit-btn:hover {
+	background-color: rgba(223, 230, 233, 0.50);
+}
 
