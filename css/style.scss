@@ -38,6 +38,7 @@ $violetPale: #A29BFE;
 $vertClair: #81ECEC;
 $vertFonce: #00B894;
 $vertLea: #007ea7;
+$salmonred: #ea5a61d6;
 
 /* FONTS */
 @mixin font {
@@ -178,24 +179,6 @@ main {
 		}
 
 	}
-
-
-	/*handle font-awesome icons colors*/
-	[class="fa"]::before,
-	[class*=" fa-"]::before {
-		color: rgba(102, 153, 204, 1);
-	}
-
-	[class="fa"]:hover::before,
-	[class*=" fa-"]:hover::before {
-		color: rgba(102, 153, 204, 1);
-	}
-
-}
-
-.logo {
-  font-size: 2.5rem;
-	font-weight: 700;
 }
 
 
@@ -235,6 +218,29 @@ select {
 label {
 	@include font;
   font-weight: bold;
+}
+
+
+/* CLASSES */
+
+/*handle font-awesome icons colors*/
+[class="fa"]::before,
+[class*=" fa-"]::before {
+	color: $vertLea;
+}
+
+[class="fa"]:hover::before,
+[class*=" fa-"]:hover::before {
+	color: $vertLea;
+}
+
+.dellinks span::before {
+		color: $salmonred;
+}
+
+.logo {
+  font-size: 2.5rem;
+	font-weight: 700;
 }
 
 #form-container {
