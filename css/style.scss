@@ -109,6 +109,12 @@ $col: calc($max-width / 12);
 	cursor: pointer;
 }
 
+button > a  {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+}
+
 body {
 	@include font;
 	box-sizing: border-box;
@@ -276,5 +282,4 @@ label {
   font-size: 2.5rem;
 	font-weight: 700;
 }
-
 
