@@ -52,6 +52,11 @@ $salmonred: #ea5a61d6;
 $maxwidth: 1540px;
 $col: calc($max-width / 12);
 
+@mixin inlineBlockFull {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+}
 
 /* CONTAINERS */
 @mixin container {
@@ -59,8 +64,7 @@ $col: calc($max-width / 12);
 	width: 100%;
 	padding-left: 0;
 	padding-right: 0;
-	margin-left: 20%;
-	margin-right: 20%;
+	margin: 10px auto;
 }
 
 
@@ -109,10 +113,9 @@ $col: calc($max-width / 12);
 	cursor: pointer;
 }
 
-button > a  {
-	display: inline-block;
-	width: 100%;
-	height: 100%;
+/* full width/height inline block links */
+button > a, #logout {
+	@include inlineBlockFull;
 }
 
 body {
@@ -124,15 +127,13 @@ header {
 	@include flex;
 	@include flexSpaceAround;
 	padding: 1rem 0;
-	background-color: $grisClair;
+	background-color: #363a46;
 
 	nav {
 		@include font;
 		@include container;
-		width: 80%;
-		background-color: $grisClair;
+		background-color: #363a46;
 		padding: 1rem;
-
 
 		ul {
 			display: flex;
@@ -155,20 +156,17 @@ main {
 
 	/* main's table */
 	table {
-	  /* width: 80%; */
-	  max-width: 1540px;
-		margin: 10px 10%;
+		@include container;
 
 	  border-collapse: collapse;
 	  border: 1px solid $grisClair;
 
 		thead {
-			border: 1px solid #dee2e6;
-			background-color: $grisClair;
+			background-color: rgb(54, 58, 70);
 
 			th {
 				vertical-align: middle;
-				color: $vertLea;
+				color: rgb(124, 204, 230);
 				font-weight: bold;
 				padding: 0.75rem;
 			}
@@ -234,8 +232,7 @@ label {
 
 #edit-btn, #add-btn {
 	@include btn;
-	display: inline-block;
-	width: 100%;
+	@include inlineBlockFull;
 	min-height: 40px;
 	margin-top: 10px;
 	margin-bottom: 20px;
@@ -246,9 +243,12 @@ label {
 }
 
 #add-btn {
-	max-width: 250px;
-	min-width: 100px;
+	max-width: 150px;
+	min-width: 75px;
 	margin: 30px 0;
+	a {
+		color: #d297d7;
+	}
 }
 
 #add-btn-container {
@@ -270,17 +270,23 @@ label {
 	color: $vertLea;
 }
 
+/* TODO */
 [class="fa"]:hover::before,
 [class*=" fa-"]:hover::before {
-	color: $vertLea;
+
 }
 
 .dellinks span::before {
-		color: $salmonred;
+	color: $salmonred;
 }
 
-.logo {
+.dellinks span:hover::before {
+	color: rgba(234, 90, 97, 1);
+}
+
+.logo, .logo >	a, a:visited {
   font-size: 2.5rem;
 	font-weight: 700;
+	color: #d297d7;
 }
 
