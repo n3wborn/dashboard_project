@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 17 août 2020 à 08:28
+-- Généré le :  mar. 18 août 2020 à 09:53
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.4.0
 
@@ -53,12 +53,10 @@ CREATE TABLE IF NOT EXISTS `achat_materiel` (
 --
 
 INSERT INTO `achat_materiel` (`ID`, `location`, `name_product`, `ref_product`, `categories`, `purchase_date`, `garanty_date`, `price`, `advice`, `picture`, `manual`) VALUES
-(2, 1, 'fefdgdf', 'ff', 3, '2019-03-04', '2020-03-05', 56, 'fsfd', 1, 1),
-(3, 2, 'mixeur', '45UtZ', 3, '2019-03-04', '2020-03-05', 45, 'Ne pas mettre les doigts dedans', 1, 2),
+(3, 2, 'Mixeur', '45UtZ', 3, '2019-03-04', '2020-03-05', 45, 'Ne pas mettre les doigts dedans', 1, 2),
 (4, 5, 'TV', 'AZ32P', 3, '2018-03-10', '2020-03-11', 450, 'Ne pas coller ses yeux à l\'écran', 2, 1),
-(5, 3, 'pof', 'AP325T', 4, '2019-07-11', '2020-07-11', 32, 'blablavla', 2, 1),
-(6, 3, 'gef', '34ZDT', 3, '2019-07-11', '2020-07-11', 329, 'blablavla', 2, 1),
-(7, 8, 'Autruche', 'PET547', 7, '2020-07-01', '2027-07-01', 530, 'Eviter de la lancer d\'un immeuble pour la voir voler ...', 3, 3);
+(6, 3, 'Chaîne hi-fi', '34ZDT', 3, '2019-07-11', '2020-07-11', 329, 'Disponibilité des pièces détachées (données fournisseur) : Pendant 3 ans', 2, 1),
+(7, 8, 'Autruche', 'PET547', 7, '2020-07-01', '2027-07-01', 530, 'Inutile de la lancer d\'un immeuble pour la voir voler ...', 3, 3);
 
 -- --------------------------------------------------------
 
