@@ -143,6 +143,9 @@ main {
 	@include flexSpaceAround;
 	@include flexAlignItemsCenter;
 
+	div {
+		@include container;
+	}
 
 	/* main's table */
 	table {
@@ -184,9 +187,6 @@ main {
 	}
 }
 
-div {
-	@include container;
-}
 
 form {
 	@include flexCol;
