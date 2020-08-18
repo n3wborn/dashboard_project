@@ -64,18 +64,6 @@ $col: calc($max-width / 12);
 }
 
 
-#add-btn-container {
-	@include flex;
-	@include flexAlignItemsCenter;
-	@include flexJustifyContentFlexEnd;
-}
-
-#form-container {
-	@include flex;
-	@include flexCenter;
-}
-
-
 /* FLEX */
 
 @mixin flex {
@@ -256,6 +244,16 @@ label {
 	min-width: 100px;
 }
 
+#add-btn-container {
+	@include flex;
+	@include flexAlignItemsCenter;
+	@include flexJustifyContentFlexEnd;
+}
+
+#form-container {
+	@include flex;
+	@include flexCenter;
+}
 
 /* CLASSES */
 
