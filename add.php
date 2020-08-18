@@ -1,9 +1,9 @@
 <?php require_once 'php/database.php';
-require_once "php/functions.php"; 
+require_once "php/functions.php";
 
-if (!connected()) {
+/*if (!connected()) {
 	header('Location: ./login.php');
-}
+}*/
 
 
 $id ='';
@@ -78,13 +78,13 @@ if ( count($_POST) > 0){
     }
     // picture
     $file = $_FILES['picture'];
-  // Get the image and convert into string 
-    $file = file_get_contents( 
-    'tmp_name'); 
-      
-    // Encode the image string data into base64 
-    $data = base64_encode($file); 
-      
+  // Get the image and convert into string
+    $file = file_get_contents(
+    'tmp_name');
+
+    // Encode the image string data into base64
+    $data = base64_encode($file);
+
 
 
     if(!isset($msg)){$msg="";}
@@ -96,7 +96,7 @@ if ( count($_POST) > 0){
             $extensionUpload = strtolower(substr(strrchr($file['name'], '.'), 1));
             if(in_array($extensionUpload, $extensionValide))
             {
-                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$file['name'];              
+                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$file['name'];
                 $deplacement = move_uploaded_file($_FILES['picture']['tmp_name'], $chemin);
                 echo "<pre>"; print_r($_FILES); echo "</pre>"; die();
 
@@ -124,7 +124,7 @@ if ( count($_POST) > 0){
             $extensionUpload = strtolower(substr(strrchr($fileMan['name'], '.'), 1));
             if(in_array($extensionUpload, $extensionValide))
             {
-                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$fileMan['name'];              
+                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$fileMan['name'];
                 $deplacement = move_uploaded_file($_FILES['manual']['tmp_name'], $chemin);
                 echo "<pre>"; print_r($_FILES); echo "</pre>"; die();
 
@@ -145,7 +145,7 @@ if ( count($_POST) > 0){
     if( $error === false){
         $sql = "INSERT INTO `achat_materiel`( `location`, `name_product`, `ref_product`, `categories`, `purchase_date`, `garanty_date`, `price`, `advice`, `picture`, `manual`) VALUES (:location, :name_product, :ref_product, :categories, :purchase_date, :garanty_date, :price, :advice, :picture, :manual )";
     }
-    
+
     $sth = $dbh->prepare($sql);
     $sth->bindParam(':location', $location, PDO::PARAM_STR);
     $sth->bindParam(':name_product', $name_product, PDO::PARAM_STR);
@@ -163,25 +163,21 @@ if ( count($_POST) > 0){
     // execute
     $sth->execute();
 
-    
+
 
     // Redirection après insertion
     header('Location: ./index.php');
 }
 
 
-
-
-
 /* TWIG */
 /* Variables */
 $project_title = 'Dashboard Project';
 
-
 /* Conf */
-require_once '../vendor/autoload.php';
+require_once 'vendor/autoload.php';
 
-$loader = new \Twig\Loader\FilesystemLoader('../templates');
+$loader = new \Twig\Loader\FilesystemLoader('templates');
 $twig = new \Twig\Environment($loader, [
     'cache' => false,
 ]);
@@ -190,7 +186,5 @@ $twig = new \Twig\Environment($loader, [
 /* Templates */
 $template = $twig->load('edit-add.html');
 echo $template->render([
-    'project_title' => $project_title,
+    'project_title' => $project_title
 ]);
-
-?>
