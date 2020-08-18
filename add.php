@@ -77,15 +77,66 @@ if ( count($_POST) > 0){
         $error = true;
     }
     // picture
-    if (strlen(trim($_POST['picture']))!== 0){
-        $picture = trim($_POST['picture']);
+    $file = $_FILES['picture'];
+  // Get the image and convert into string 
+    $file = file_get_contents( 
+    'tmp_name'); 
+      
+    // Encode the image string data into base64 
+    $data = base64_encode($file); 
+      
+
+
+    if(!isset($msg)){$msg="";}
+    if (isset($_FILES['picture'])&& !empty($file)){
+        $tailleMax= 2097152;
+        $extensionValide= array('jpg', 'jpeg', 'png', 'gif');
+            if($_FILES['picture']['size'] <= $tailleMax)
+            {
+            $extensionUpload = strtolower(substr(strrchr($file['name'], '.'), 1));
+            if(in_array($extensionUpload, $extensionValide))
+            {
+                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$file['name'];              
+                $deplacement = move_uploaded_file($_FILES['picture']['tmp_name'], $chemin);
+                echo "<pre>"; print_r($_FILES); echo "</pre>"; die();
+
+                if($deplacement){
+                    $update_pic = $dbh->prepare('INSERT INTO pic VALUES picture=:picture where id = :id');
+                    $update_pic->bindParam(':picture', $chemin, PDO::PARAM_STR);
+                    $update_pic->bindParam(':id', $_GET['id'], PDO::PARAM_STR);
+                    $update_pic->execute();
+                }
+                }
+            }
+            echo "Images must be in the format : .jpg, .jpeg, .gif, .png";
     }
     else{
         $error = true;
     }
     // manual
-    if (strlen(trim($_POST['manual']))!== 0){
-        $manual = trim($_POST['manual']);
+    $fileMan = $_FILES['manual'];
+    if(!isset($msg)){$msg="";}
+    if (isset($_FILES['manual'])&& !empty($fileMan)){
+        $tailleMax= 2097152;
+        $extensionValide= array('pdf', 'txt');
+            if($_FILES['manual']['size'] <= $tailleMax)
+            {
+            $extensionUpload = strtolower(substr(strrchr($fileMan['name'], '.'), 1));
+            if(in_array($extensionUpload, $extensionValide))
+            {
+                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$fileMan['name'];              
+                $deplacement = move_uploaded_file($_FILES['manual']['tmp_name'], $chemin);
+                echo "<pre>"; print_r($_FILES); echo "</pre>"; die();
+
+                if($deplacement){
+                    $update_manual= $dbh->prepare('INSERT INTO manu VALUES manual=:manual where id = :id');
+                    $update_manual->bindParam(':manual', $chemin, PDO::PARAM_STR);
+                    $update_manual->bindParam(':id', $_GET['id'], PDO::PARAM_STR);
+                    $update_manual->execute();
+                }
+                }
+            }
+            echo "Files must be in the format : .pdf, .txt";
     }
     else{
         $error = true;
