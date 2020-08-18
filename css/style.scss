@@ -52,6 +52,7 @@ $salmonred: #ea5a61d6;
 $maxwidth: 1540px;
 $col: calc($max-width / 12);
 
+
 /* CONTAINERS */
 @mixin container {
 	max-width: 1540px;
@@ -60,6 +61,18 @@ $col: calc($max-width / 12);
 	padding-right: 0;
 	margin-left: 20%;
 	margin-right: 20%;
+}
+
+
+#add-btn-container {
+	@include flex;
+	@include flexAlignItemsCenter;
+	@include flexJustifyContentFlexEnd;
+}
+
+#form-container {
+	@include flex;
+	@include flexCenter;
 }
 
 
@@ -82,6 +95,10 @@ $col: calc($max-width / 12);
 @mixin flexCenter {
 	align-items: center;
 	justify-content: center;
+}
+
+@mixin flexJustifyContentFlexEnd {
+	justify-content: flex-end;
 }
 
 @mixin flexSpaceBetween {
@@ -134,12 +151,10 @@ header {
 }
 
 main {
-	@include flex;
+	@include flexCol;
 	@include flexSpaceAround;
-	/* main's divs */
-	div {
-		@include container;
-	}
+	@include flexAlignItemsCenter;
+
 
 	/* main's table */
 	table {
@@ -181,6 +196,9 @@ main {
 	}
 }
 
+div {
+	@include container;
+}
 
 form {
 	@include flexCol;
@@ -220,6 +238,24 @@ label {
   font-weight: bold;
 }
 
+#edit-btn, #add-btn {
+	@include btn;
+	display: inline-block;
+	width: 100%;
+	min-height: 40px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+#edit-btn:hover, #add-btn:hover {
+	background-color: rgba(223, 230, 233, 0.50);
+}
+
+#add-btn {
+	max-width: 250px;
+	min-width: 100px;
+}
+
 
 /* CLASSES */
 
@@ -243,21 +279,4 @@ label {
 	font-weight: 700;
 }
 
-#form-container {
-	@include flex;
-	@include flexCenter;
-}
-
-#edit-btn {
-	@include btn;
-	display: inline-block;
-	width: 100%;
-	min-height: 40px;
-	margin-top: 10px;
-	margin-bottom: 20px;
-}
-
-#edit-btn:hover {
-	background-color: rgba(223, 230, 233, 0.50);
-}
 
