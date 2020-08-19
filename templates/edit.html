@@ -9,16 +9,16 @@
 	<form id="edit-add-form" action="" method="post" enctype="multipart/form-data">
 
 		<label for="name_product">Product</label>
-		<input type="text" name="name_product" class="form-input" placeholder="{{ datas.name_product }}" value="{{ datas.name_product }}" required>
+		<input type="text" name="name_product" class="form-input" placeholder="Product name ..." value="{{ datas.name_product }}" required>
 
 		<label for="ref_product">Reference</label>
-		<input type="text" name="ref_product" class="form-input" value="{{ datas.ref_product }}" required>
+		<input type="text" name="ref_product" class="form-input" placeholder="Reference ..." value="{{ datas.ref_product }}" required>
 
 		<label for="location">Site</label>
-		<input type="text" name="location" class="form-input" value="{{ datas.location }}" required>
+		<input type="text" name="location" class="form-input" placeholder="Site ..." value="{{ datas.sites_name }}" required>
 
 		<label for="price">Price</label>
-		<input type="text" name="price" class="form-input" value="{{ datas.price }}" required>
+		<input type="text" name="price" class="form-input" placeholder="Price ..." value="{{ datas.price }}" required>
 
 		<label for="categories">Category</label>
 		<select  class="form-input" name="categories" value="{{ datas.cat_ID }}">
@@ -41,7 +41,7 @@
 		<input type="date" name="garanty_date" class="form-input" value="{{ datas.garanty_date }}" >
 
 		<label for="advice">Advice</label>
-		<input type="text" name="advice" class="form-input" value="{{ datas.advice }}">
+		<input type="text" name="advice" class="form-input" placeholder="Enter an advice ..." value="{{ datas.advice }}">
 
 		<label for="picture">Choose a profile picture :</label>
 		<input type="file" name="picture" accept="image/png, image/jpeg, image/jpg,image/gif">
