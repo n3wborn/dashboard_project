@@ -119,13 +119,13 @@ if ( count($_POST) > 0){
     }
     // picture
     $file = $_FILES['picture'];
-  // Get the image and convert into string
-    $file = file_get_contents(
-    'tmp_name');
-
-    // Encode the image string data into base64
-    $data = base64_encode($file);
-
+  // Get the image and convert into string 
+    $file =   file_get_contents($_FILES["picture"]["tmp_name"]);
+      
+    // Encode the image string data into base64 
+    $file_datas = base64_encode($file); 
+    print $file_datas;
+      
 
 
     if(!isset($msg)){$msg="";}
