@@ -29,7 +29,7 @@ if( isset($_GET['id'])){
 
     $data = $sth->fetch(PDO::FETCH_ASSOC);
 
-    $location = $data['location'];
+    $location = $data['loc_ID'];
     $name_product= $data['name_product'];
     $ref_product = $data['ref_product'];
     $categories = $data['cat_ID'];
