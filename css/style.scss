@@ -28,6 +28,32 @@ table {
 	border-spacing:0;
 }
 
+button, input {overflow: visible;}
+button, select {text-transform: none;}
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+	outline: 1px dotted ButtonText;
+}
+
+
 ol,ul {list-style:none;}
 a, a:visited {text-decoration:none; color: rgba(54, 58, 70, 1);}
 
@@ -105,6 +131,7 @@ $col: calc($max-width / 12);
 /* ELEMENTS */
 @mixin btn {
 	@include font;
+	width: 100%;
 	font-weight: bold;
 	padding: .5rem;
 	border: solid 1px $vertLea;
@@ -194,41 +221,59 @@ main {
 
 form {
 	@include flexCol;
+	@include flexAlignItemsCenter;
 	@include font;
-	width: 80%;
+	width: 100%;
 	max-width: 750px;
 	min-width: 400px;
 	padding-top: 100px;
 	padding-bottom: 100px ;
 
 	input,
+	textarea,
 	input[type="date"],
 	input[type="text"],
 	input[type="password"],
+	input[type="time"],
+	input::placeholder,
 	input[type="text"]:focus,
 	input[type="password"]:focus,
 	select {
-		font-size: 1rem;
-		line-height: 1.5;
-		/* width: 25rem; */
+		@include font;
+		width: 100%;
+		max-width: 750px;
+		line-height: 40px;
 		margin-top: 10px;
 		margin-bottom: 30px;
 		height: 40px;
 		padding: .5rem 1rem;
+		vertical-align: center;
 		border: solid 1px $vertLea;
 		border-radius: .3rem;
 	}
+
+
+	::-moz-placeholder {
+		opacity: 1;
+	}
+
+	label {
+		@include font;
+		width: 100%;
+	  font-weight: bold;
+	}
+
+	select {
+		box-sizing: content-box;
+		appearance: none;
+	}
 }
 
-select {
-	box-sizing: content-box;
-	appearance: none;
-}
 
-label {
+::file-chooser-button {
 	@include font;
-  font-weight: bold;
 }
+
 
 #edit-btn, #add-btn {
 	@include btn;
@@ -240,6 +285,10 @@ label {
 
 #edit-btn:hover, #add-btn:hover {
 	background-color: rgba(223, 230, 233, 0.50);
+}
+
+#edit-btn {
+	max-width: 350px;
 }
 
 #add-btn {
@@ -284,7 +333,8 @@ label {
 	color: rgba(234, 90, 97, 1);
 }
 
-.logo, .logo >	a, a:visited {
+.logo,
+.logo >	a, a:visited {
   font-size: 2.5rem;
 	font-weight: 700;
 	color: #d297d7;
