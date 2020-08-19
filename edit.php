@@ -118,47 +118,41 @@ if ( count($_POST) > 0){
         $error = true;
     }
     // picture
-    $file = $_FILES['picture'];
   // Get the image and convert into string 
-    $file =   file_get_contents($_FILES["picture"]["tmp_name"]);
+    $file =  file_get_contents($_FILES["picture"]["tmp_name"]);
       
     // Encode the image string data into base64 
     $file_datas = base64_encode($file); 
     print $file_datas;
       
-
-
-    if(!isset($msg)){$msg="";}
-    if (isset($_FILES['picture'])&& !empty($file)){
+    if (isset($_FILES['picture'])&& !empty($_FILES['picture'][name])){
         $tailleMax= 2097152;
         $extensionValide= array('jpg', 'jpeg', 'png', 'gif');
-            if($_FILES['picture']['size'] <= $tailleMax)
-            {
-            $extensionUpload = strtolower(substr(strrchr($file['name'], '.'), 1));
+            if($_FILES['picture']['size'] <= $tailleMax){
+            $extensionUpload = strtolower(substr(strrchr($_FILES['picture'][name], '.'), 1));
             if(in_array($extensionUpload, $extensionValide))
             {
+<<<<<<< HEAD
                 $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$file['name'];
+=======
+                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$_FILES['picture'][name];              
+>>>>>>> leadev
                 $deplacement = move_uploaded_file($_FILES['picture']['tmp_name'], $chemin);
-                echo "<pre>"; print_r($_FILES); echo "</pre>"; die();
-
                 if($deplacement){
-                    $update_pic = $dbh->prepare('UPDATE pic SET picture=:picture where id = :id');
-                    $update_pic->bindParam(':picture', $chemin, PDO::PARAM_STR);
-                    $update_pic->bindParam(':id', $_GET['id'], PDO::PARAM_STR);
-                    $update_pic->execute();
+                    $picture = $chemin;
+                }else{
+                    $msgPic = "Error.";
                 }
-                }
+            }else{
+                $msgPic = "Images must be in the format : .jpg, .jpeg, .gif, .png";
             }
-            echo "Images must be in the format : .jpg, .jpeg, .gif, .png";
-    }
-    else{
-        $error = true;
-    }
+        }
+        }
+
 
 
     // manual
     $fileMan = $_FILES['manual'];
-    if(!isset($msg)){$msg="";}
     if (isset($_FILES['manual'])&& !empty($fileMan)){
         $tailleMax= 2097152;
         $extensionValide= array('pdf', 'txt');
@@ -169,7 +163,6 @@ if ( count($_POST) > 0){
             {
                 $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$fileMan['name'];
                 $deplacement = move_uploaded_file($_FILES['manual']['tmp_name'], $chemin);
-                echo "<pre>"; print_r($_FILES); echo "</pre>"; die();
 
                 if($deplacement){
                     $update_manual= $dbh->prepare('UPDATE manu SET manual=:manual where id = :id');
