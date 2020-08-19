@@ -21,8 +21,8 @@
 		<input type="text" name="price" class="form-input" value="{{ datas.price }}" required>
 
 		<label for="categories">Category</label>
-		<select  class="form-input" name="categories" value="{{ datas.categories }}">
-			<option value="" disabled selected hidden>Select a category ...</option>
+		<select  class="form-input" name="categories" value="{{ datas.cat_ID }}">
+			<option value="{{ datas.cat_ID }}" disabled selected hidden>{{ datas.cat_name }}</option>
 			<option value="3" >Appliances</option>
 			<option value="4">Clothes</option>
 			<option value="5">Vehicles</option>
