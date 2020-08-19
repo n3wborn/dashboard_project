@@ -19,7 +19,7 @@ $manual = '';
 $error = 'false';
 
 if( isset($_GET['id'])){
-    $sql = 'SELECT `location`,`name_product`,`ref_product`,`categories` AS "cat_ID", category.name AS "cat_name", `purchase_date`,`garanty_date`,`price`,`advice`,`picture`,`manual` FROM `achat_materiel` INNER JOIN category ON achat_materiel.categories=category.id where achat_materiel.id=:id';
+    $sql = 'SELECT `location` AS "loc_ID", sites.name AS "sites.name", `name_product`,`ref_product`,`categories` AS "cat_ID", category.name AS "cat_name",`purchase_date`,`garanty_date`,`price`,`advice`,`picture`,`manual` FROM `achat_materiel` INNER JOIN category ON achat_materiel.categories=category.id INNER JOIN sites on achat_materiel.location=sites.id where achat_materiel.id=:id ';
 
     $sth = $dbh->prepare( $sql );
 
