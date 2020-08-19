@@ -128,7 +128,6 @@ if ( count($_POST) > 0){
       
 
 
-    if(!isset($msg)){$msg="";}
     if (isset($_FILES['picture'])&& !empty($file)){
         $tailleMax= 2097152;
         $extensionValide= array('jpg', 'jpeg', 'png', 'gif');
@@ -158,7 +157,6 @@ if ( count($_POST) > 0){
 
     // manual
     $fileMan = $_FILES['manual'];
-    if(!isset($msg)){$msg="";}
     if (isset($_FILES['manual'])&& !empty($fileMan)){
         $tailleMax= 2097152;
         $extensionValide= array('pdf', 'txt');
