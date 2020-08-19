@@ -167,7 +167,6 @@ if ( count($_POST) > 0){
             {
                 $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$fileMan['name'];              
                 $deplacement = move_uploaded_file($_FILES['manual']['tmp_name'], $chemin);
-                echo "<pre>"; print_r($_FILES); echo "</pre>"; die();
 
                 if($deplacement){
                     $update_manual= $dbh->prepare('UPDATE manu SET manual=:manual where id = :id');
