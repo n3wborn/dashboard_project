@@ -184,7 +184,7 @@ $twig = new \Twig\Environment($loader, [
 
 
 /* Templates */
-$template = $twig->load('edit-add.html');
+$template = $twig->load('add.html');
 echo $template->render([
     'project_title' => $project_title
 ]);

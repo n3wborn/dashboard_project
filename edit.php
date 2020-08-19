@@ -119,13 +119,13 @@ if ( count($_POST) > 0){
     }
     // picture
     $file = $_FILES['picture'];
-  // Get the image and convert into string 
-    $file = file_get_contents( 
-    'tmp_name'); 
-      
-    // Encode the image string data into base64 
-    $data = base64_encode($file); 
-      
+  // Get the image and convert into string
+    $file = file_get_contents(
+    'tmp_name');
+
+    // Encode the image string data into base64
+    $data = base64_encode($file);
+
 
 
     if(!isset($msg)){$msg="";}
@@ -137,7 +137,7 @@ if ( count($_POST) > 0){
             $extensionUpload = strtolower(substr(strrchr($file['name'], '.'), 1));
             if(in_array($extensionUpload, $extensionValide))
             {
-                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$file['name'];              
+                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$file['name'];
                 $deplacement = move_uploaded_file($_FILES['picture']['tmp_name'], $chemin);
                 echo "<pre>"; print_r($_FILES); echo "</pre>"; die();
 
@@ -167,7 +167,7 @@ if ( count($_POST) > 0){
             $extensionUpload = strtolower(substr(strrchr($fileMan['name'], '.'), 1));
             if(in_array($extensionUpload, $extensionValide))
             {
-                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$fileMan['name'];              
+                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$fileMan['name'];
                 $deplacement = move_uploaded_file($_FILES['manual']['tmp_name'], $chemin);
                 echo "<pre>"; print_r($_FILES); echo "</pre>"; die();
 
@@ -231,8 +231,8 @@ $twig = new \Twig\Environment($loader, [
 
 
 /* Templates */
-$template = $twig->load('edit-add.html');
+$template = $twig->load('edit.html');
 echo $template->render([
 	'project_title' => $project_title,
 	'datas' => $data
-]); 
+]);
