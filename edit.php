@@ -30,9 +30,7 @@ if( isset($_GET['id'])){
     $sth->execute();
 
     $data = $sth->fetch(PDO::FETCH_ASSOC);
-    header('Location: ../index.php');
-    exit;
-}
+    
 
     $location = $data['loc_ID'];
     $name_product= $data['name_product'];
@@ -94,7 +92,6 @@ if ( count($_POST) > 0){
     else{
         $error = true;
     }
-    
     //purchase_date
     if (strlen(trim($_POST['purchase_date']))!== 0){
         $purchase_date = trim($_POST['purchase_date']);
