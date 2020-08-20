@@ -16,7 +16,8 @@ $price = '';
 $advice = '';
 $picture = '';
 $manual = '';
-$error = 'false';
+$error = false;
+$data = array();
 
 if( isset($_GET['id'])){
     $sql = 'SELECT `location` AS "loc_ID", sites.name AS "sites_name", `name_product`,`ref_product`,`categories` AS "cat_ID", category.name AS "cat_name",`purchase_date`,`garanty_date`,`price`,`advice`,`picture`,`manual` FROM `achat_materiel` INNER JOIN category ON achat_materiel.categories=category.id INNER JOIN sites on achat_materiel.location=sites.id where achat_materiel.id=:id ';
