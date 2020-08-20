@@ -17,7 +17,8 @@ $price = '';
 $advice = '';
 $picture = '';
 $manual = '';
-$error = 'false';
+$error = false;
+$data = array();
 
 if ( count($_POST) > 0){
     // location
