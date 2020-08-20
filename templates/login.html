@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}{% endblock title %}
+
+{% block main %}
+	<div id="login-container">
+
+		<form action="login.php" method="post" id="form-login">
+				<input type="text" name="user" placeholder="Login ..." required>
+				<input type="text" name="password" placeholder="Password ..." required>
+				<button type="submit" id="login-btn">Login</button>
+		</form>
+
+	</div>
+{% endblock main %}
