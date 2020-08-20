@@ -157,12 +157,12 @@ if ( count($_POST) > 0){
 
     // execute
     $sth->execute();
+}
 
 
 
     // Redirection après insertion
     header('Location: ./index.php');
-}
 
 
 /* TWIG */
