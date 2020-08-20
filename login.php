@@ -1,11 +1,7 @@
-<<<<<<< HEAD
-<?php require_once 'php/database.php';
-require_once "php/functions.php";
-=======
-<?php 
+<?php
 require_once 'php/database.php';
-require_once "php/functions.php"; 
->>>>>>> leadev
+require_once "php/functions.php";
+
 
 if (connected()) {
 	header('Location: ./index.php');
