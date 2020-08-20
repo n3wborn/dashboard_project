@@ -22,3 +22,25 @@ if(count($_POST) > 0) {
 		echo "Utilisateur ou mot de passe vide";
 	}
 }
+
+
+
+/* TWIG */
+/* Variables */
+$project_title = 'Dashboard Project';
+
+
+/* Conf */
+require_once 'vendor/autoload.php';
+
+$loader = new \Twig\Loader\FilesystemLoader('templates');
+$twig = new \Twig\Environment($loader, [
+    'cache' => false,
+]);
+
+
+/* Templates */
+$template = $twig->load('login.html');
+echo $template->render([
+	'project_title' => $project_title
+]);
