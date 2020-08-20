@@ -3,11 +3,23 @@
 {% block title %}{% endblock title %}
 
 {% block main %}
+
 	<div id="add-btn-container">
 		<button id="add-btn">
 			<a href="add.php" id="add-link">Add</a>
 		</button>
 		</div>
+
+	<div id="modal" class="hidden">
+		<div id="modal_dialog" >
+			<p id="modal_text">Are you sure	 ?</p>
+			<div class="modal_area_btn">
+				<button id="modal-btn-yes">Yes</button>
+				<button id="modal-btn-no">No</button>
+			</div>
+		</div>
+	</div>
+
 	<table>
 		<thead>
 			<tr>
