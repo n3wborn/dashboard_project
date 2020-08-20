@@ -1,4 +1,5 @@
-<?php require 'php/database.php';
+<?php
+require_once 'php/database.php';
 require_once "php/functions.php";
 
 // if (!connected()) {

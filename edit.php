@@ -1,4 +1,5 @@
-<?php require_once 'php/database.php';
+<?php
+require_once 'php/database.php';
 require_once "php/functions.php";
 
 /*if (!connected()) {
@@ -157,7 +158,7 @@ if ( count($_POST) > 0){
             $extensionUpload = strtolower(substr(strrchr($_FILES['manual'][name], '.'), 1));
             if(in_array($extensionUpload, $extensionValide))
             {
-                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$_FILES['manual'][name];              
+                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$_FILES['manual'][name];
                 $deplacement = move_uploaded_file($_FILES['manual']['tmp_name'], $chemin);
                     if($deplacement){
                         $manual = $chemin;

@@ -1,4 +1,5 @@
-<?php require_once 'php/database.php';
+<?php
+require_once 'php/database.php';
 require_once "php/functions.php";
 
 /*if (!connected()) {
@@ -97,7 +98,7 @@ if ( count($_POST) > 0){
     if (isset($_FILES['picture'])&& !empty($_FILES['picture'][name])){
         $tailleMax= 2097152;
         $extensionValide= array('jpg', 'jpeg', 'png', 'gif');
-            if($_FILES['picture']['size'] <= $tailleMax){
+        if($_FILES['picture']['size'] <= $tailleMax){
             $extensionUpload = strtolower(substr(strrchr($_FILES['picture'][name], '.'), 1));
             if(in_array($extensionUpload, $extensionValide))
             {
@@ -112,29 +113,29 @@ if ( count($_POST) > 0){
                 $msgPic = "Images must be in the format : .jpg, .jpeg, .gif, .png";
             }
         }
-        }
+    }
 
     // manual
     if (isset($_FILES['manual'])&& !empty($_FILES['manual'][name])){
         $tailleMax= 2097152;
         $extensionValide= array('pdf', 'txt');
-            if($_FILES['manual']['size'] <= $tailleMax)
-            {
+        if($_FILES['manual']['size'] <= $tailleMax)
+        {
             $extensionUpload = strtolower(substr(strrchr($_FILES['manual'][name], '.'), 1));
             if(in_array($extensionUpload, $extensionValide))
             {
-                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$_FILES['manual'][name];              
+                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$_FILES['manual'][name];
                 $deplacement = move_uploaded_file($_FILES['manual']['tmp_name'], $chemin);
-                    if($deplacement){
-                        $manual = $chemin;
-                    }else{
-                        $msgManual = "Error.";
-                    }
+                if($deplacement){
+                    $manual = $chemin;
                 }else{
-                    $msgManual = "Document must be in the format : .txt, .pdf";
+                    $msgManual = "Error.";
                 }
+            }else{
+                $msgManual = "Document must be in the format : .txt, .pdf";
             }
-            }
+        }
+    }
 
     if( $error === false){
         $sql = "INSERT INTO `achat_materiel`( `location`, `name_product`, `ref_product`, `categories`, `purchase_date`, `garanty_date`, `price`, `advice`, `picture`, `manual`) VALUES (:location, :name_product, :ref_product, :categories, :purchase_date, :garanty_date, :price, :advice, :picture, :manual )";
