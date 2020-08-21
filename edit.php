@@ -128,14 +128,14 @@ if ( count($_POST) > 0){
     $file_datas = base64_encode($file);
     print $file_datas;
 
-    if (isset($_FILES['picture'])&& !empty($_FILES['picture'][name])){
+    if (isset($_FILES['picture'])&& !empty($_FILES['picture']['name'])){
         $tailleMax= 2097152;
         $extensionValide= array('jpg', 'jpeg', 'png', 'gif');
             if($_FILES['picture']['size'] <= $tailleMax){
-            $extensionUpload = strtolower(substr(strrchr($_FILES['picture'][name], '.'), 1));
+            $extensionUpload = strtolower(substr(strrchr($_FILES['picture']['name'], '.'), 1));
             if(in_array($extensionUpload, $extensionValide))
             {
-                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$_FILES['picture'][name];
+                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$_FILES['picture']['name'];
                 $deplacement = move_uploaded_file($_FILES['picture']['tmp_name'], $chemin);
                 if($deplacement){
                     $picture = $chemin;
@@ -151,15 +151,15 @@ if ( count($_POST) > 0){
 
 
     // manual
-    if (isset($_FILES['manual'])&& !empty($_FILES['manual'][name])){
+    if (isset($_FILES['manual'])&& !empty($_FILES['manual']['name'])){
         $tailleMax= 2097152;
         $extensionValide= array('pdf', 'txt');
             if($_FILES['manual']['size'] <= $tailleMax)
             {
-            $extensionUpload = strtolower(substr(strrchr($_FILES['manual'][name], '.'), 1));
+            $extensionUpload = strtolower(substr(strrchr($_FILES['manual']['name'], '.'), 1));
             if(in_array($extensionUpload, $extensionValide))
             {
-                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$_FILES['manual'][name];
+                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$_FILES['manual']['name'];
                 $deplacement = move_uploaded_file($_FILES['manual']['tmp_name'], $chemin);
                     if($deplacement){
                         $manual = $chemin;
