@@ -7,6 +7,8 @@ if (!connected()) {
 }
 
 
+var_dump('TEST');
+
 $id ='';
 $location = '';
 $name_product = '';
@@ -21,7 +23,8 @@ $manual = '';
 $error = false;
 $data = array();
 
-if ( count($_POST) > 0){
+if ( !empty($_POST) ) {
+    var_dump('Donnees post');
     // location
     if (strlen(trim($_POST['location']))!== 0){
         $location = trim($_POST['location']);
@@ -80,13 +83,15 @@ if ( count($_POST) > 0){
     }
     // picture
   // Get the image and convert into string
-    $file = file_get_contents($_FILES['picture']['name']);
-    var_dump($file);
+    $file = file_get_contents($_FILES['picture']['tmp_name']);
+    var_dump($_FILES['picture']['tmp_name']);
     // Encode the image string data into base64
-    $data = base64_encode($file);
+    $picturebase64 = base64_encode($file);
+        var_dump($picturebase64);
+    die();
 
 
-    if (isset($_FILES['picture'])&& !empty($_FILES['picture']['name'])){
+/*    if (isset($_FILES['picture'])&& !empty($_FILES['picture']['name'])){
         $tailleMax= 2097152;
         $extensionValide= array('jpg', 'jpeg', 'png', 'gif');
             if($_FILES['picture']['size'] <= $tailleMax){
@@ -104,9 +109,13 @@ if ( count($_POST) > 0){
                 $msgPic = "Images must be in the format : .jpg, .jpeg, .gif, .png";
             }
         }
-        }
+        }*/
     // manual
-        if (isset($_FILES['manual'])&& !empty($_FILES['manual']['name'])){
+        $manfile = file_get_contents($_FILES['manual']['tmp_name']);
+        var_dump($_FILES['manual']['tmp_name']);
+        // Encode the image string data into base64
+        $manbase64 = base64_encode($manfile);
+/*        if (isset($_FILES['manual'])&& !empty($_FILES['manual']['name'])){
         $tailleMax= 2097152;
         $extensionValide= array('pdf', 'txt');
             if($_FILES['manual']['size'] <= $tailleMax)
@@ -125,7 +134,7 @@ if ( count($_POST) > 0){
                     $msgManual = "Document must be in the format : .txt, .pdf";
                 }
             }
-            }
+            }*/
 
     if( $error === false){
         $sql = "INSERT INTO `achat_materiel`( `location`, `name_product`, `ref_product`, `categories`, `purchase_date`, `garanty_date`, `price`, `advice`, `picture`, `manual`) VALUES (:location, :name_product, :ref_product, :categories, :purchase_date, :garanty_date, :price, :advice, :picture, :manual)";
@@ -140,8 +149,8 @@ if ( count($_POST) > 0){
     $sth->bindValue(':garanty_date', strftime("%Y-%m-%d", strtotime($garanty_date)), PDO::PARAM_STR);
     $sth->bindParam(':price', $price, PDO::PARAM_STR);
     $sth->bindParam(':advice', $advice, PDO::PARAM_STR);
-    $sth->bindParam(':picture', $picture, PDO::PARAM_STR);
-    $sth->bindParam(':manual', $manual, PDO::PARAM_STR);
+    $sth->bindParam(':picture', $picturebase64, PDO::PARAM_STR);
+    $sth->bindParam(':manual', $manbase64, PDO::PARAM_STR);
 
     // execute
     $sth->execute();
