@@ -59,11 +59,10 @@ a, a:visited {text-decoration:none; color: rgba(54, 58, 70, 1);}
 
 
 /* COLORS */
-$grisClair: #DFE6E9;
-$violetPale: #A29BFE;
-$vertClair: #81ECEC;
-$vertFonce: #00B894;
-$vertLea: #007ea7;
+$lightGrey: #DFE6E9;
+$darkGreen: #00B894;
+$blueGreen: #007ea7;
+$lightBlue: #d1e4eab0;
 $salmonred: #ea5a61d6;
 
 /* FONTS */
@@ -134,7 +133,7 @@ $col: calc($max-width / 12);
 	width: 100%;
 	font-weight: bold;
 	padding: .5rem;
-	border: solid 1px $vertLea;
+	border: solid 1px $blueGreen;
 	background-color: rgba(223, 230, 233, 1);
 	border-radius: .3rem;
 	cursor: pointer;
@@ -184,7 +183,7 @@ main {
 		@include container;
 
 	  border-collapse: collapse;
-	  border: 1px solid $grisClair;
+	  border: 1px solid $lightGrey;
 
 		thead {
 			background-color: rgb(54, 58, 70);
@@ -203,14 +202,13 @@ main {
 
 		td {
 			@include font;
-			color: var(--c-fifth);
 			padding: 0.75rem;
 			vertical-align: middle;
 			text-align: center;
 		}
 
 		tr:nth-child(even) {
-			background-color: rgba(125, 175, 138, 0.20);
+			background-color: $lightBlue;
 		}
 
 	}
@@ -245,7 +243,7 @@ form {
 		padding: .5rem 1rem;
 		vertical-align: middle;
 		line-height: 40px;
-		border: solid 1px $vertLea;
+		border: solid 1px $blueGreen;
 		border-radius: .3rem;
 	}
 
@@ -270,7 +268,7 @@ form {
 	}
 
 	input:required:valid {
-		border-color: $vertFonce;
+		border-color: $darkGreen;
 	}
 
 }
@@ -402,7 +400,7 @@ form {
 /*handle font-awesome icons colors*/
 [class="fa"]::before,
 [class*=" fa-"]::before {
-	color: $vertLea;
+	color: $blueGreen;
 }
 
 /* TODO */
