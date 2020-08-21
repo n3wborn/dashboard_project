@@ -134,7 +134,7 @@ if ( count($_POST) > 0){
     $manfile = file_get_contents($_FILES['man']['tmp_name']);
     // Encode the image string data into base64
     $manbase64 = base64_encode($manfile);
-    
+
     if( $error === false){
         if( isset($_POST['edit'])){
             $sql = 'UPDATE achat_materiel SET location=:location, name_product=:name_product, ref_product=:ref_product, categories=:categories, purchase_date=:purchase_date, garanty_date=:garanty_date, price=:price, advice=:advice, picture=:picture, manual=:manual WHERE id=:id';
@@ -149,8 +149,8 @@ if ( count($_POST) > 0){
     $sth->bindValue(':garanty_date', strftime("%Y-%m-%d", strtotime($garanty_date)), PDO::PARAM_STR);
     $sth->bindParam(':price', $price, PDO::PARAM_STR);
     $sth->bindParam(':advice', $advice, PDO::PARAM_STR);
-    $sth->bindParam(':picture', $picture, PDO::PARAM_STR);
-    $sth->bindParam(':manual', $manual, PDO::PARAM_STR);
+    $sth->bindParam(':picture', $picturebase64, PDO::PARAM_STR);
+    $sth->bindParam(':manual', $manbase64, PDO::PARAM_STR);
 
     if( isset($_POST['edit'])){
         $sth->bindParam(':id', $id, PDO::PARAM_INT);
