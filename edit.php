@@ -121,58 +121,20 @@ if ( count($_POST) > 0){
     else{
         $error = true;
     }
+
+
     // picture
-  // Get the image and convert into string
-    $file =  file_get_contents($_FILES["picture"]["tmp_name"]);
-
+    // Get the image and convert into string
+    $file = file_get_contents($_FILES['picture']['tmp_name']);
     // Encode the image string data into base64
-    $file_datas = base64_encode($file);
-    print $file_datas;
-
-    if (isset($_FILES['picture'])&& !empty($_FILES['picture']['name'])){
-        $tailleMax= 2097152;
-        $extensionValide= array('jpg', 'jpeg', 'png', 'gif');
-            if($_FILES['picture']['size'] <= $tailleMax){
-            $extensionUpload = strtolower(substr(strrchr($_FILES['picture']['name'], '.'), 1));
-            if(in_array($extensionUpload, $extensionValide))
-            {
-                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$_FILES['picture']['name'];
-                $deplacement = move_uploaded_file($_FILES['picture']['tmp_name'], $chemin);
-                if($deplacement){
-                    $picture = $chemin;
-                }else{
-                    $msgPic = "Error.";
-                }
-            }else{
-                $msgPic = "Images must be in the format : .jpg, .jpeg, .gif, .png";
-            }
-        }
-        }
-
+    $picturebase64 = base64_encode($file);
 
 
     // manual
-    if (isset($_FILES['manual'])&& !empty($_FILES['manual']['name'])){
-        $tailleMax= 2097152;
-        $extensionValide= array('pdf', 'txt');
-            if($_FILES['manual']['size'] <= $tailleMax)
-            {
-            $extensionUpload = strtolower(substr(strrchr($_FILES['manual']['name'], '.'), 1));
-            if(in_array($extensionUpload, $extensionValide))
-            {
-                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$_FILES['manual']['name'];
-                $deplacement = move_uploaded_file($_FILES['manual']['tmp_name'], $chemin);
-                    if($deplacement){
-                        $manual = $chemin;
-                    }else{
-                        $msgManual = "Error.";
-                    }
-                }else{
-                    $msgManual = "Document must be in the format : .txt, .pdf";
-                }
-            }
-            }
-
+    $manfile = file_get_contents($_FILES['man']['tmp_name']);
+    // Encode the image string data into base64
+    $manbase64 = base64_encode($manfile);
+    
     if( $error === false){
         if( isset($_POST['edit'])){
             $sql = 'UPDATE achat_materiel SET location=:location, name_product=:name_product, ref_product=:ref_product, categories=:categories, purchase_date=:purchase_date, garanty_date=:garanty_date, price=:price, advice=:advice, picture=:picture, manual=:manual WHERE id=:id';
