@@ -19,6 +19,7 @@ $advice = '';
 $picture = '';
 $man = '';
 $error = false;
+// $data = array();
 
 
 if ( count($_POST) > 0) {
