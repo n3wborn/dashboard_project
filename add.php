@@ -81,8 +81,7 @@ if ( count($_POST) > 0){
     // picture
     $file = $_FILES['picture'];
   // Get the image and convert into string
-    $file = file_get_contents(
-        'tmp_name');
+    $file = file_get_contents('tmp_name');
 
     // Encode the image string data into base64
     $data = base64_encode($file);
@@ -98,7 +97,6 @@ if ( count($_POST) > 0){
             if(in_array($extensionUpload, $extensionValide)) {
                 $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$file['name'];
                 $deplacement = move_uploaded_file($_FILES['picture']['tmp_name'], $chemin);
-                echo "<pre>"; print_r($_FILES); echo "</pre>"; die();
 
                 if($deplacement){
                     $update_pic = $dbh->prepare('INSERT INTO pic VALUES picture=:picture where id = :id');
@@ -124,7 +122,6 @@ if ( count($_POST) > 0){
             if(in_array($extensionUpload, $extensionValide)) {
                 $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$fileMan['name'];
                 $deplacement = move_uploaded_file($_FILES['manual']['tmp_name'], $chemin);
-                echo "<pre>"; print_r($_FILES); echo "</pre>"; die();
 
                 if($deplacement){
                     $update_manual= $dbh->prepare('INSERT INTO manu VALUES manual=:manual where id = :id');
@@ -143,7 +140,7 @@ if ( count($_POST) > 0){
     }
 
     if( $error === false){
-        $sql = "INSERT INTO `achat_materiel`( `location`, `name_product`, `ref_product`, `categories`, `purchase_date`, `garanty_date`, `price`, `advice`, `picture`, `manual`) VALUES (:location, :name_product, :ref_product, :categories, :purchase_date, :garanty_date, :price, :advice, :picture, :manual )";
+        $sql = "INSERT INTO `achat_materiel`( `location`, `name_product`, `ref_product`, `categories`, `purchase_date`, `garanty_date`, `price`, `advice`, `picture`, `manual`) VALUES (:location, :name_product, :ref_product, :categories, :purchase_date, :garanty_date, :price, :advice, :picture, :manual)";
     }
 
     $sth = $dbh->prepare($sql);
@@ -158,12 +155,8 @@ if ( count($_POST) > 0){
     $sth->bindParam(':picture', $picture, PDO::PARAM_STR);
     $sth->bindParam(':manual', $manual, PDO::PARAM_STR);
 
-
-
     // execute
     $sth->execute();
-
-
 
     // Redirection après insertion
     header('Location: ./index.php');
