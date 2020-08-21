@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 21 août 2020 à 09:11
+-- Généré le :  ven. 21 août 2020 à 11:43
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.4.0
 
@@ -116,7 +116,7 @@ INSERT INTO `login` (`id`, `user`, `password`) VALUES
 DROP TABLE IF EXISTS `manu`;
 CREATE TABLE IF NOT EXISTS `manu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `manual` varchar(100) NOT NULL,
+  `manual` longtext NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
@@ -138,7 +138,7 @@ INSERT INTO `manu` (`id`, `manual`) VALUES
 DROP TABLE IF EXISTS `pic`;
 CREATE TABLE IF NOT EXISTS `pic` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `picture` varchar(100) DEFAULT NULL,
+  `picture` longtext DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
