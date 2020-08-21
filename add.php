@@ -79,7 +79,6 @@ if ( count($_POST) > 0){
         $error = true;
     }
     // picture
-    $file = $_FILES['picture'];
   // Get the image and convert into string
     $file = file_get_contents('tmp_name');
 
@@ -108,7 +107,7 @@ if ( count($_POST) > 0){
         }
         }
     // manual
-    if (isset($_FILES['manual'])&& !empty($_FILES['manual'][name])){
+        if (isset($_FILES['manual'])&& !empty($_FILES['manual'][name])){
         $tailleMax= 2097152;
         $extensionValide= array('pdf', 'txt');
             if($_FILES['manual']['size'] <= $tailleMax)
