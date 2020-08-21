@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 18 août 2020 à 09:53
+-- Généré le :  ven. 21 août 2020 à 09:11
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.4.0
 
@@ -170,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `sites` (
 
 INSERT INTO `sites` (`id`, `name`) VALUES
 (1, 'gefz'),
-(2, 'gez'),
+(2, 'Amazon'),
 (3, 'https://www.wix.com/'),
 (4, 'https://www.cdiscount.com/'),
 (5, 'https://www.amazon.fr/'),
