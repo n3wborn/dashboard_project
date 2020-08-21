@@ -88,56 +88,46 @@ if ( count($_POST) > 0){
 
 
 
-    if(!isset($msg)){$msg="";}
-    if (isset($_FILES['picture'])&& !empty($file)){
+    if (isset($_FILES['picture'])&& !empty($_FILES['picture'][name])){
         $tailleMax= 2097152;
         $extensionValide= array('jpg', 'jpeg', 'png', 'gif');
-        if($_FILES['picture']['size'] <= $tailleMax) {
-            $extensionUpload = strtolower(substr(strrchr($file['name'], '.'), 1));
-            if(in_array($extensionUpload, $extensionValide)) {
-                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$file['name'];
+            if($_FILES['picture']['size'] <= $tailleMax){
+            $extensionUpload = strtolower(substr(strrchr($_FILES['picture'][name], '.'), 1));
+            if(in_array($extensionUpload, $extensionValide))
+            {
+                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$_FILES['picture'][name];
                 $deplacement = move_uploaded_file($_FILES['picture']['tmp_name'], $chemin);
-
                 if($deplacement){
-                    $update_pic = $dbh->prepare('INSERT INTO pic VALUES picture=:picture where id = :id');
-                    $update_pic->bindParam(':picture', $chemin, PDO::PARAM_STR);
-                    $update_pic->bindParam(':id', $_GET['id'], PDO::PARAM_STR);
-                    $update_pic->execute();
-                }
-            }
-        }
-        echo "Images must be in the format : .jpg, .jpeg, .gif, .png";
-    }
-    else{
-        $error = true;
-    }
-    // manual
-    $fileMan = $_FILES['manual'];
-    if(!isset($msg)){$msg="";}
-    if (isset($_FILES['manual'])&& !empty($fileMan)){
-        $tailleMax= 2097152;
-        $extensionValide= array('pdf', 'txt');
-        if($_FILES['manual']['size'] <= $tailleMax) {
-            $extensionUpload = strtolower(substr(strrchr($fileMan['name'], '.'), 1));
-            if(in_array($extensionUpload, $extensionValide)) {
-                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$fileMan['name'];
-                $deplacement = move_uploaded_file($_FILES['manual']['tmp_name'], $chemin);
-
-                if($deplacement){
-                    $update_manual= $dbh->prepare('INSERT INTO manu VALUES manual=:manual where id = :id');
-                    $update_manual->bindParam(':manual', $chemin, PDO::PARAM_STR);
-                    $update_manual->bindParam(':id', $_GET['id'], PDO::PARAM_STR);
-                    $update_manual->execute();
+                    $picture = $chemin;
+                }else{
+                    $msgPic = "Error.";
                 }
             }else{
-                $msgManual = "Document must be in the format : .txt, .pdf";
+                $msgPic = "Images must be in the format : .jpg, .jpeg, .gif, .png";
             }
         }
-        echo "Files must be in the format : .pdf, .txt";
-    }
-    else{
-        $error = true;
-    }
+        }
+    // manual
+    if (isset($_FILES['manual'])&& !empty($_FILES['manual'][name])){
+        $tailleMax= 2097152;
+        $extensionValide= array('pdf', 'txt');
+            if($_FILES['manual']['size'] <= $tailleMax)
+            {
+            $extensionUpload = strtolower(substr(strrchr($_FILES['manual'][name], '.'), 1));
+            if(in_array($extensionUpload, $extensionValide))
+            {
+                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$_FILES['manual'][name];
+                $deplacement = move_uploaded_file($_FILES['manual']['tmp_name'], $chemin);
+                    if($deplacement){
+                        $manual = $chemin;
+                    }else{
+                        $msgManual = "Error.";
+                    }
+                }else{
+                    $msgManual = "Document must be in the format : .txt, .pdf";
+                }
+            }
+            }
 
     if( $error === false){
         $sql = "INSERT INTO `achat_materiel`( `location`, `name_product`, `ref_product`, `categories`, `purchase_date`, `garanty_date`, `price`, `advice`, `picture`, `manual`) VALUES (:location, :name_product, :ref_product, :categories, :purchase_date, :garanty_date, :price, :advice, :picture, :manual)";
