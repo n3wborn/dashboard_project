@@ -19,6 +19,7 @@ if(count($_POST) > 0) {
 
 
 	if ($user === $result["user"] && pwd_verify($password, $result["password"])) {
+		$_SESSION['admin'] = 1;
 		header('Location: ./index.php');
 	} else {
 		echo "Utilisateur ou mot de passe vide";
