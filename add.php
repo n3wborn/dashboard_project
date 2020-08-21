@@ -7,8 +7,6 @@ if (!connected()) {
 }
 
 
-var_dump('TEST');
-
 $id ='';
 $location = '';
 $name_product = '';
@@ -19,12 +17,12 @@ $garanty_date = '';
 $price = '';
 $advice = '';
 $picture = '';
-$manual = '';
+$man = '';
 $error = false;
-$data = array();
 
-if ( !empty($_POST) ) {
-    var_dump('Donnees post');
+
+if ( count($_POST) > 0) {
+
     // location
     if (strlen(trim($_POST['location']))!== 0){
         $location = trim($_POST['location']);
@@ -81,65 +79,28 @@ if ( !empty($_POST) ) {
     else{
         $error = true;
     }
+
+
     // picture
-  // Get the image and convert into string
+    // Get the image and convert into string
     $file = file_get_contents($_FILES['picture']['tmp_name']);
-    var_dump($_FILES['picture']['tmp_name']);
     // Encode the image string data into base64
     $picturebase64 = base64_encode($file);
-        var_dump($picturebase64);
-    die();
 
 
-/*    if (isset($_FILES['picture'])&& !empty($_FILES['picture']['name'])){
-        $tailleMax= 2097152;
-        $extensionValide= array('jpg', 'jpeg', 'png', 'gif');
-            if($_FILES['picture']['size'] <= $tailleMax){
-            $extensionUpload = strtolower(substr(strrchr($_FILES['picture']['name'], '.'), 1));
-            if(in_array($extensionUpload, $extensionValide))
-            {
-                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$_FILES['picture']['name'];
-                $deplacement = move_uploaded_file($_FILES['picture']['tmp_name'], $chemin);
-                if($deplacement){
-                    $picture = $chemin;
-                }else{
-                    $msgPic = "Error.";
-                }
-            }else{
-                $msgPic = "Images must be in the format : .jpg, .jpeg, .gif, .png";
-            }
-        }
-        }*/
     // manual
-        $manfile = file_get_contents($_FILES['manual']['tmp_name']);
-        var_dump($_FILES['manual']['tmp_name']);
-        // Encode the image string data into base64
-        $manbase64 = base64_encode($manfile);
-/*        if (isset($_FILES['manual'])&& !empty($_FILES['manual']['name'])){
-        $tailleMax= 2097152;
-        $extensionValide= array('pdf', 'txt');
-            if($_FILES['manual']['size'] <= $tailleMax)
-            {
-            $extensionUpload = strtolower(substr(strrchr($_FILES['manual']['name'], '.'), 1));
-            if(in_array($extensionUpload, $extensionValide))
-            {
-                $chemin = dirname(__FILE__). DIRECTORY_SEPARATOR . "medias/".$_FILES['manual']['name'];
-                $deplacement = move_uploaded_file($_FILES['manual']['tmp_name'], $chemin);
-                    if($deplacement){
-                        $manual = $chemin;
-                    }else{
-                        $msgManual = "Error.";
-                    }
-                }else{
-                    $msgManual = "Document must be in the format : .txt, .pdf";
-                }
-            }
-            }*/
+    $manfile = file_get_contents($_FILES['man']['tmp_name']);
+    // Encode the image string data into base64
+    $manbase64 = base64_encode($manfile);
 
+
+    // if every field is filled
     if( $error === false){
+        // prepare sql request
         $sql = "INSERT INTO `achat_materiel`( `location`, `name_product`, `ref_product`, `categories`, `purchase_date`, `garanty_date`, `price`, `advice`, `picture`, `manual`) VALUES (:location, :name_product, :ref_product, :categories, :purchase_date, :garanty_date, :price, :advice, :picture, :manual)";
     }
 
+    // prepare named parameters
     $sth = $dbh->prepare($sql);
     $sth->bindParam(':location', $location, PDO::PARAM_STR);
     $sth->bindParam(':name_product', $name_product, PDO::PARAM_STR);
@@ -152,10 +113,10 @@ if ( !empty($_POST) ) {
     $sth->bindParam(':picture', $picturebase64, PDO::PARAM_STR);
     $sth->bindParam(':manual', $manbase64, PDO::PARAM_STR);
 
-    // execute
+    // and ute
     $sth->execute();
 
-    // Redirection après insertion
+    // Redirection if done
     header('Location: ./index.php');
 }
 
