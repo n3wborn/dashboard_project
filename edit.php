@@ -43,6 +43,7 @@ if( isset($_GET['id'])){
     $picture = $data['picture'];
     $manual = $data['manual'];
     $id = htmlentities($_GET['id']);
+    $error = false;
 }
 
 if ( count($_POST) > 0){
