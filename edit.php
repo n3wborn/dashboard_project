@@ -46,23 +46,18 @@ if( isset($_GET['id'])){
     $error = false;
 }
 
-if ( count($_POST) > 0){
+if (count($_POST) > 0){
     // location
+    var_dump($_POST);
     if (!empty($_POST['location'])){
         if(strlen(trim($_POST['location']))== -1){
             $location = trim($_POST['location']);
-            $req2= "INSERT INTO sites (name) VALUES (:location)";
-            $sth = $dbh->prepare($req2);
-            $sth->bindParam(':location', $location, PDO::PARAM_STR);
-            $sth->execute();
-            $location=$dbh->lastInsertId();
         }else{
-            $location=trim($_POST['location']);
+            $error = true;
         }
     }
-    else{
-        $error = true;
-    }
+
+
     // name product
     if (strlen(trim($_POST['name_product']))!== 0){
         $name_product = trim($_POST['name_product']);
@@ -77,22 +72,16 @@ if ( count($_POST) > 0){
     else{
         $error = true;
     }
+
     // categories
     if (!empty($_POST['categories'])){
         if(strlen(trim($_POST['categories']))== -1){
-            $location = trim($_POST['categories']);
-            $req3= "INSERT INTO cateogry (name) VALUES (:categories)";
-            $sth = $dbh->prepare($req3);
-            $sth->bindParam(':categories', $categories, PDO::PARAM_STR);
-            $sth->execute();
-            $categories=$dbh->lastInsertId();
+            $categories = trim($_POST['categories']);
         }else{
-            $categories=trim($_POST['categories']);
+            $error = true;
         }
     }
-    else{
-        $error = true;
-    }
+
     //purchase_date
     if (strlen(trim($_POST['purchase_date']))!== 0){
         $purchase_date = trim($_POST['purchase_date']);
@@ -102,7 +91,7 @@ if ( count($_POST) > 0){
     }
     // guarantee date
     if (strlen(trim($_POST['garanty_date']))!== 0){
-        $guarantee_date = trim($_POST['garanty_date']);
+        $garanty_date = trim($_POST['garanty_date']);
     }
     else{
         $error = true;
@@ -137,8 +126,9 @@ if ( count($_POST) > 0){
 
     if( $error === false){
         if( isset($_POST['edit'])){
-            $sql = 'UPDATE achat_materiel SET location=:location, name_product=:name_product, ref_product=:ref_product, categories=:categories, purchase_date=:purchase_date, garanty_date=:garanty_date, price=:price, advice=:advice, picture=:picture, manual=:manual WHERE id=:id';
+            $sql = 'UPDATE achat_materiel SET location=:location, name_product=:name_product, ref_product=:ref_product, categories=:categories, purchase_date=:purchase_date, garanty_date=:garanty_date, price=:price, advice=:advice picture=:picture, manual=:manual WHERE id=:id';
         }
+        var_dump($_POST['edit']);
 
     $sth = $dbh->prepare($sql);
     $sth->bindParam(':location', $location, PDO::PARAM_STR);
@@ -151,7 +141,6 @@ if ( count($_POST) > 0){
     $sth->bindParam(':advice', $advice, PDO::PARAM_STR);
     $sth->bindParam(':picture', $picturebase64, PDO::PARAM_STR);
     $sth->bindParam(':manual', $manbase64, PDO::PARAM_STR);
-
     if( isset($_POST['edit'])){
         $sth->bindParam(':id', $id, PDO::PARAM_INT);
     }
