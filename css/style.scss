@@ -139,6 +139,9 @@ $col: calc($max-width / 12);
 	cursor: pointer;
 }
 
+
+
+
 /* full width/height inline block links */
 button > a, #logout {
 	@include inlineBlockFull;
@@ -175,7 +178,6 @@ main {
 	@include flexCol;
 	@include flexSpaceAround;
 	@include flexAlignItemsCenter;
-
 
 
 	/* main's table */
@@ -231,8 +233,6 @@ form {
 	input[type="password"],
 	input[type="time"],
 	input::placeholder,
-	input[type="text"]:focus,
-	input[type="password"]:focus,
 	select {
 		@include font;
 		width: 80%;
@@ -245,6 +245,11 @@ form {
 		line-height: 40px;
 		border: solid 1px $blueGreen;
 		border-radius: .3rem;
+		background-color: none;
+
+	  &:focus {
+	  	outline: none;
+		}
 	}
 
 	::-moz-placeholder {
@@ -282,15 +287,14 @@ form {
 #edit-btn, #add-btn, #login-btn {
 	@include btn;
 	@include inlineBlockFull;
+	color: #d297d7;
 	min-height: 40px;
 	min-width: 200px;
 	margin-top: 10px;
 	margin-bottom: 20px;
-}
-
-
-#edit-btn:hover, #add-btn:hover {
-	background-color: rgba(223, 230, 233, 0.50);
+		&:hover {
+		background-color: rgba(223, 230, 233, 0.50);
+		}
 }
 
 #edit-btn {
@@ -301,9 +305,6 @@ form {
 	max-width: 150px;
 	min-width: 75px;
 	margin: 30px 0;
-	a {
-		color: #d297d7;
-	}
 }
 
 #login-container {
@@ -316,10 +317,20 @@ form {
 	#form-login {
 		width: 100%;
 
-		input {
-			width: 80%;
+		input,
+		textarea {
+			width: 100%;
 			min-width: 250px;
 			max-width: 450px;
+			border-color: 1px solid #007ea7;
+
+			&:focus {
+				outline: none;
+			}
+
+			&[value=""] {
+				border-color: 1px solid #007ea7;
+			}
 		}
 
 		#login-btn {
