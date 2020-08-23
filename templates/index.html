@@ -39,25 +39,25 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% for results in results %}
+			{% for result in results %}
 				<tr>
-					<td>{{ results.ID }}</td>
-					<td>{{ results.place }}</td>
-					<td>{{ results.name_product }}</td>
-					<td>{{ results.ref_product }}</td>
-					<td>{{ results.name }}</td>
-					<td>{{ results.purchase_date }}</td>
-					<td>{{ results.garanty_date }}</td>
-					<td>{{ results.price }} €</td>
-					<td>{{ results.advice }}</td>
+					<td>{{ result.ID }}</td>
+					<td>{{ result.place }}</td>
+					<td>{{ result.name_product }}</td>
+					<td>{{ result.ref_product }}</td>
+					<td>{{ result.name }}</td>
+					<td>{{ result.purchase_date }}</td>
+					<td>{{ result.garanty_date }}</td>
+					<td>{{ result.price }} €</td>
+					<td>{{ result.advice }}</td>
 					<td>
-						<a class="picLinks" id="editLink_{{ results.picture }}"  href="#"><span class="fa fa-image" aria-hidden="true"></span></a>
+						<a class="picLinks" id="picLink_{{ result.ID }}"  href="get_file.php?id={{ result.ID }}"><span class="fa fa-image" aria-hidden="true"></span></a>
 					</td>
 					<td>
-						<a class="manLinks" id="manLink_{{ results.manual }}"  href="#"><span class="fa fa-file" aria-hidden="true"></span></a>
+						<a class="manLinks" id="manLink_{{ result.ID }}"  href="get_file.php?id={{ result.ID }}"><span class="fa fa-file" aria-hidden="true"></span></a>
 					</td>
-					<td><a class="editLinks" id="editLink_{{ results.ID }}"  href="edit.php?id={{ results.ID }}"><span class="fa fa-edit"  aria-hidden="true"></span></a></td>
-					<td><a class="dellinks" id="delete_{{ results.ID }}" href="delete.php?id={{ results.ID }}"><span class="fa fa-trash"  aria-hidden="true"></span></a></td>
+					<td><a class="editLinks" id="editLink_{{ result.ID }}"  href="edit.php?id={{ result.ID }}"><span class="fa fa-edit"  aria-hidden="true"></span></a></td>
+					<td><a class="dellinks" id="delete_{{ result.ID }}" href="delete.php?id={{ result.ID }}"><span class="fa fa-trash"  aria-hidden="true"></span></a></td>
 				</tr>
 			{% endfor %}
 		</tbody>
