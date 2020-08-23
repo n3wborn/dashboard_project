@@ -64,6 +64,11 @@ input:focus,
 	opacity: 1;
 }
 
+/* remove horrible placeholder for file inputq */
+input[type="file"]{
+	color: transparent;
+}
+
 ol,ul {list-style:none;}
 a, a:visited {text-decoration:none; color: rgba(54, 58, 70, 1);}
 
