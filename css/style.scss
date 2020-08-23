@@ -45,7 +45,6 @@ button::-moz-focus-inner,
   padding: 0;
 }
 
-
 button:-moz-focusring,
 [type="button"]:-moz-focusring,
 [type="reset"]:-moz-focusring,
@@ -54,18 +53,35 @@ button:-moz-focusring,
 }
 
 
+a:focus,
+button:focus,
+input:focus,
+:focus {
+  outline: none;
+}
+
+::-moz-placeholder {
+	opacity: 1;
+}
+
 ol,ul {list-style:none;}
 a, a:visited {text-decoration:none; color: rgba(54, 58, 70, 1);}
 
 
-/* COLORS */
+/* VARS */
 $lightGrey: #DFE6E9;
 $darkGreen: #00B894;
 $blueGreen: #007ea7;
 $lightBlue: #d1e4eab0;
 $salmonred: #ea5a61d6;
 
-/* FONTS */
+/* widths / heights */
+$maxwidth: 1540px;
+
+
+/* MIXINS */
+
+/* Fonts */
 @mixin font {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 	font-size: 1.2rem;
@@ -73,17 +89,15 @@ $salmonred: #ea5a61d6;
 	color: rgba(54, 58, 70, 1);
 }
 
-/* widths / heights */
-$maxwidth: 1540px;
-$col: calc($max-width / 12);
 
+/* For in-buttons links */
 @mixin inlineBlockFull {
 	display: inline-block;
 	width: 100%;
 	height: 100%;
 }
 
-/* CONTAINERS */
+/* Container mixin */
 @mixin container {
 	max-width: 1540px;
 	width: 100%;
@@ -93,7 +107,7 @@ $col: calc($max-width / 12);
 }
 
 
-/* FLEX */
+/* Flex mixins */
 
 @mixin flex {
 	display: flex;
@@ -127,25 +141,7 @@ $col: calc($max-width / 12);
 }
 
 
-/* ELEMENTS */
-@mixin btn {
-	@include font;
-	width: 100%;
-	font-weight: bold;
-	padding: .5rem;
-	border: solid 1px $blueGreen;
-	background-color: rgba(223, 230, 233, 1);
-	border-radius: .3rem;
-	cursor: pointer;
-}
-
-
-
-
-/* full width/height inline block links */
-button > a, #logout {
-	@include inlineBlockFull;
-}
+/* STRUCTURE */
 
 body {
 	@include font;
@@ -180,10 +176,9 @@ main {
 	@include flexAlignItemsCenter;
 
 
-	/* main's table */
+	/* main table */
 	table {
 		@include container;
-
 	  border-collapse: collapse;
 	  border: 1px solid $lightGrey;
 
@@ -195,10 +190,10 @@ main {
 				color: rgb(124, 204, 230);
 				font-weight: bold;
 				padding: 0.75rem;
-			}
 
-			th:nth-last-child(2) {
-				column-span: 2;
+				&:nth-last-child(2) {
+					column-span: 2;
+				}
 			}
 		}
 
@@ -212,11 +207,11 @@ main {
 		tr:nth-child(even) {
 			background-color: $lightBlue;
 		}
-
 	}
 }
 
 
+/* Forms login + add items */
 form {
 	@include flexCol;
 	@include flexAlignItemsCenter;
@@ -243,15 +238,15 @@ form {
 		line-height: 40px;
 		border: solid 1px $blueGreen;
 		border-radius: .3rem;
-		background-color: none;
+		background-color: #d1e4eab0;
 
-	  &:focus {
-	  	outline: none;
+		&:invalid {
+			border-color: #ea5a61d6;
 		}
-	}
 
-	::-moz-placeholder {
-		opacity: 1;
+		&:required:valid {
+			border-color: $darkGreen;
+		}
 	}
 
 	label {
@@ -266,45 +261,60 @@ form {
 		appearance: none;
 	}
 
-	input:invalid {
-	  border-color: #ea5a61d6;
-	}
-
-	input:required:valid {
-		border-color: $darkGreen;
-	}
-
 }
 
+
+/* ELEMENTS */
+
+/* Buttons */
+
+@mixin btn {
+	@include font;
+	width: 80%;
+	font-weight: bold;
+	padding: .5rem;
+	border: solid 1px $blueGreen;
+	background-color: rgba(223, 230, 233, 1);
+	border-radius: .3rem;
+	cursor: pointer;
+	text-transform: uppercase;
+}
 
 ::file-chooser-button {
 	@include font;
 }
 
+/* full width/height inline block links */
+button > a, #logout {
+	@include inlineBlockFull;
+}
 
 #edit-btn, #add-btn, #login-btn {
 	@include btn;
 	@include inlineBlockFull;
 	color: #d297d7;
+	width: 350px;
 	min-height: 40px;
-	min-width: 200px;
 	margin-top: 10px;
 	margin-bottom: 20px;
 		&:hover {
-		background-color: rgba(223, 230, 233, 0.50);
+			background-color: rgba(223, 230, 233, 0.50);
 		}
 }
 
-#edit-btn {
-	max-width: 350px;
-}
-
 #add-btn {
+	width: 80%;
 	max-width: 150px;
-	min-width: 75px;
 	margin: 30px 0;
 }
 
+#login-btn {
+	width: 200px;
+	height: 50px;
+}
+
+
+/* CONTAINERS */
 #login-container {
 	@include font;
 	@include flex;
@@ -315,8 +325,7 @@ form {
 	#form-login {
 		width: 100%;
 
-		input,
-		textarea {
+		input {
 			width: 100%;
 			min-width: 250px;
 			max-width: 450px;
@@ -330,27 +339,24 @@ form {
 				border-color: 1px solid #007ea7;
 			}
 		}
-
-		#login-btn {
-			width: 200px;
-			height: 50px;
-		}
 	}
 }
 
-
+#form-container,
 #add-btn-container {
 	@include container;
 	@include flex;
+}
+
+#form-container {
+	@include flexCenter;
+}
+
+#add-btn-container {
 	@include flexAlignItemsCenter;
 	@include flexJustifyContentFlexEnd;
 }
 
-#form-container {
-	@include container;
-	@include flex;
-	@include flexCenter;
-}
 
 /* MODAL STUFF */
 #modal {
@@ -381,7 +387,8 @@ form {
   margin: 2rem;
 }
 
-#modal-btn-yes, #modal-btn-no {
+#modal-btn-yes,
+#modal-btn-no {
 	@include font;
 	@include btn;
 	width: 100%;
@@ -393,10 +400,11 @@ form {
   font-size: 2rem;
   font-weight: bold;
   cursor: pointer;
-}
 
-#modal-btn-yes:hover, #modal-btn-no:hover {
-  background-color: rgba(0,0,0, 0.0);
+  &:hover {
+		background-color: rgba(0,0,0, 0.0);
+
+  }
 }
 
 #modal-btn-no {color: #fe1e72;}
@@ -412,19 +420,8 @@ form {
 	color: $blueGreen;
 }
 
-/* TODO */
-[class="fa"]:hover::before,
-[class*=" fa-"]:hover::before {
-
-}
-
-.dellinks span::before {
-	color: $salmonred;
-}
-
-.dellinks span:hover::before {
-	color: rgba(234, 90, 97, 1);
-}
+.dellinks span::before {color: $salmonred;}
+.dellinks span:hover::before {color: rgba(234, 90, 97, 1);}
 
 .logo,
 .logo >	a, a:visited {
@@ -433,6 +430,8 @@ form {
 	color: #d297d7;
 }
 
+
+/* MEDIA QUERIES */
 
 @media only screen and (orientation:portrait) and (max-width:700px){
 	header > nav > {
