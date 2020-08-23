@@ -227,12 +227,10 @@ form {
 	padding-bottom: 100px ;
 
 	input,
-	textarea,
 	input[type="date"],
 	input[type="text"],
 	input[type="password"],
 	input[type="time"],
-	input::placeholder,
 	select {
 		@include font;
 		width: 80%;
