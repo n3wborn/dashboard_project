@@ -25,7 +25,7 @@ if (count($result)===0){
 /* TWIG */
 /* Variables */
 $project_title = 'Dashboard Project';
-$test = 'Is ok';
+
 
 /* Conf */
 require_once 'vendor/autoload.php';
