@@ -17,7 +17,7 @@ $garanty_date = '';
 $price = '';
 $advice = '';
 $picture = '';
-$man = '';
+$manual = '';
 $error = false;
 // $data = array();
 
@@ -25,6 +25,7 @@ $error = false;
 if ( count($_POST) > 0) {
 
     // location
+    
     if (strlen(trim($_POST['location']))!== 0){
         $location = trim($_POST['location']);
     }
@@ -81,24 +82,63 @@ if ( count($_POST) > 0) {
         $error = true;
     }
 
+        if(!empty($_FILES)){
+            $pic_name = $_FILES['picture']['name'];
+            $pic_extension = strrchr($pic_name, ".");
+        
+            $pic_tmp_name = $_FILES['picture']['tmp_name'];
+            $pic_dest = 'medias/'.$pic_name;
+        
+        
+            $extAut_pic = array('.png', '.PNG', '.jpg', '.JPG', '.jpeg', '.JPEG');
+        //Si extension bonne, on continue :
+            if (in_array($pic_extension, $extAut_pic)){
+                //On déplace le fichier dans le fichier destination
+                if(move_uploaded_file($pic_tmp_name, $pic_dest)){
+                    //On stocke dans ma bdd
+                    //  $sql = $dbh->prepare('INSERT INTO pic(file_url, name) VALUES (?,?)');
+                    // $sql->execute(array($pic_name, $pic_dest));
+                    echo 'Fichier envoyé avec succès';
+                }else{
+                    echo 'Une erreur est survenue lors de lenvoi du fichier';
+                }
+            }else{
+                echo 'Seuls les fichiers .jpg, .jpeg et .png sont autorisés';
+            }
+        }
 
-    // picture
-    // Get the image and convert into string
-    $file = file_get_contents($_FILES['picture']['tmp_name']);
-    // Encode the image string data into base64
-    $picturebase64 = base64_encode($file);
-
-
-    // manual
-    $manfile = file_get_contents($_FILES['man']['tmp_name']);
-    // Encode the image string data into base64
-    $manbase64 = base64_encode($manfile);
+        if(!empty($_FILES)){
+            $man_name = $_FILES['manual']['name'];
+            $man_extension = strrchr($man_name, ".");
+        
+            $man_tmp_name = $_FILES['manual']['tmp_name'];
+            $man_dest = 'medias/'.$man_name;
+        
+        
+            $extAut_man = array('.pdf', '.PDF', '.txt', '.TXT');
+        //Si extension bonne, on continue :
+            if (in_array($man_extension, $extAut_man)){
+                //On déplace le fichier dans le fichier destination
+                if(move_uploaded_file($man_tmp_name, $man_dest)){
+                    //On stocke dans ma bdd
+                    //  $sql = $dbh->prepare('INSERT INTO manu(man_url, name ) VALUES (?,?)');
+                    // $sql->execute(array($man_name, $man_dest));
+                    echo 'Fichier envoyé avec succès';
+                }else{
+                    echo 'Une erreur est survenue lors de l\'envoi du fichier';
+                }
+            }else{
+                echo 'Seuls les fichiers .pdf, et .TXT sont autorisés';
+            }
+        }
+        
+        
 
 
     // if every field is filled
     if( $error === false){
         // prepare sql request
-        $sql = "INSERT INTO `achat_materiel`( `location`, `name_product`, `ref_product`, `categories`, `purchase_date`, `garanty_date`, `price`, `advice`, `picture`, `manual`) VALUES (:location, :name_product, :ref_product, :categories, :purchase_date, :garanty_date, :price, :advice, :picture, :manual)";
+        $sql = "INSERT INTO `achat_materiel`( `location`, `name_product`, `ref_product`, `categories`, `purchase_date`, `garanty_date`, `price`, `advice`), `pic.name`, `manu.name` VALUES (:location, :name_product, :ref_product, :categories, :purchase_date, :garanty_date, :price, :advice, :picture, :manual)";
     }
 
     // prepare named parameters
@@ -111,8 +151,9 @@ if ( count($_POST) > 0) {
     $sth->bindValue(':garanty_date', strftime("%Y-%m-%d", strtotime($garanty_date)), PDO::PARAM_STR);
     $sth->bindParam(':price', $price, PDO::PARAM_STR);
     $sth->bindParam(':advice', $advice, PDO::PARAM_STR);
-    $sth->bindParam(':picture', $picturebase64, PDO::PARAM_STR);
-    $sth->bindParam(':manual', $manbase64, PDO::PARAM_STR);
+    $sth->bindParam(':picture', $pic_name, PDO::PARAM_STR);
+    $sth->bindParam(':manual', $man_name, PDO::PARAM_STR);
+
 
     // and ute
     $sth->execute();
