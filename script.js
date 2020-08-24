@@ -4,7 +4,10 @@ const noBtn = document.getElementById('modal_btn-no');
 const yesBtn = document.getElementById('modal_btn-yes');
 const modal = document.getElementById('modal');
 
-// functions needed
+
+// FUNCTIONS
+
+// Used to toggle readyToDelete class
 function removeReadyToDelete() {
 	const elementsToDelete = document.getElementsByClassName('readyToDelete')
 	for (elementToDelete of elementsToDelete) {
@@ -13,12 +16,23 @@ function removeReadyToDelete() {
 }
 
 
+// Used to Show pictures and manual of our elements
+function showFile(src, width, height, alt) {
+	var img = document.createElement("img");
+	img.src = src;
+	img.width = width;
+	img.height = height;
+	img.alt = file;
+}
+
+
+// Delete links Modal
+
 // Keep an eye on delete links
 // if click, show modal and permit element deletion
 for (deleteLink of deleteLinks) {
 	deleteLink.addEventListener('click', function(e){
 		e.preventDefault();
-
 		modal.classList.toggle('hidden');
 		this.classList.toggle('readyToDelete');
 	})
@@ -29,8 +43,6 @@ for (deleteLink of deleteLinks) {
 // Avoid element deletion if clicked on noBtn
 noBtn.addEventListener('click', function() {
 	modal.classList.toggle('hidden');
-
-	// and remove class permitting deletion
 	removeReadyToDelete();
 })
 
@@ -55,3 +67,70 @@ yesBtn.addEventListener('click', function() {
 	}
 })
 
+
+// PICTURES
+
+// constants needed
+const modalPic = document.getElementById('modal-pic');
+const manLinks = document.getElementsByClassName('manLinks');
+const picLinks = document.getElementsByClassName('picLinks');
+
+
+// Keep an eye on manual links
+// show a full width/height modal
+// check size (and resize if needed keeping ratio)
+// display the image in the modal
+for (manLink of manLinks) {
+	manLink.addEventListener('click', function(e) {
+		console.log(e);
+	})
+}
+
+
+// Keep an eye on pictures links
+// show a full width/height modal
+// check size (and resize if needed keeping ratio)
+// display the image in the modal
+for (picLink of picLinks) {
+	picLink.addEventListener('click', function(e) {
+		e.preventDefault();
+
+		// show modal
+		modalPic.classList.toggle('hidden');
+
+		// add img element in picDiv
+		let picDiv = document.getElementById('modal-pic_div');
+		let img = document.createElement('IMG');
+
+		let xhr = new XMLHttpRequest();
+		xhr.open("GET", picLink, true);
+
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4 && xhr.status == "200") {
+				res = xhr.responseText;
+				img.setAttribute("id", "productImg")
+				img.setAttribute("alt", "Picture");
+				img.setAttribute("src", res);
+				picDiv.appendChild(img);
+				// show response type
+				console.log(xhr.responseText);
+			}
+		}
+
+		// send datas
+		xhr.send();
+	})
+}
+
+
+// When modalPic is visible, hide it if clicked
+modalPic.addEventListener('click', function() {
+	if (!modalPic.classList.contains('hidden')) {
+		modalPic.classList.toggle('hidden');
+	}
+
+	// and remove image displayed
+	let picDiv = document.getElementById('modal-pic_div');
+	let img = document.getElementById("productImg");
+	picDiv.removeChild(img);
+})
