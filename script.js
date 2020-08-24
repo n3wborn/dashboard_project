@@ -1,7 +1,7 @@
 // Elements  we will have to look for
 const deleteLinks = document.getElementsByClassName('dellinks');
-const noBtn = document.getElementById('modal-btn-no');
-const yesBtn = document.getElementById('modal-btn-yes');
+const noBtn = document.getElementById('modal_btn-no');
+const yesBtn = document.getElementById('modal_btn-yes');
 const modal = document.getElementById('modal');
 
 // functions needed

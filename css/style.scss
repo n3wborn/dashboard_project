@@ -364,7 +364,7 @@ button > a, #logout {
 
 
 /* MODAL STUFF */
-#modal {
+@mixin modal {
 	@include flex;
 	@include flexCenter;
   position: absolute;
@@ -375,25 +375,7 @@ button > a, #logout {
   background-color: rgba(0,0,0, 0.80);
 }
 
-#modal_dialog {
-	@include flexCol;
-	@include flexCenter;
-  min-width: 40%;
-  min-height: 50%;
-  padding: 2rem;
-}
-
-#modal_text {
-	@include font;
-	color: #FFF ;
-  font-size: 2.5rem;
-  font-weight: bold;
-  text-align: center;
-  margin: 2rem;
-}
-
-#modal-btn-yes,
-#modal-btn-no {
+@mixin modalBtn {
 	@include font;
 	@include btn;
 	width: 100%;
@@ -404,17 +386,50 @@ button > a, #logout {
   border-radius: 25px;
   font-size: 2rem;
   font-weight: bold;
-  cursor: pointer;
+	cursor: pointer;
 
-  &:hover {
+	&:hover {
 		background-color: rgba(0,0,0, 0.0);
-
   }
 }
 
-#modal-btn-no {color: #fe1e72;}
-#modal-btn-yes {color: #0b8f0bc7;}
-#modal.hidden {display: none;}
+#modal,
+#modal-pic {
+	@include modal;
+
+	&_dialog {
+		@include flexCol;
+		@include flexCenter;
+	  min-width: 40%;
+	  min-height: 50%;
+	  padding: 2rem;
+	}
+
+	&_text {
+		@include font;
+		color: #FFF ;
+	  font-size: 2.5rem;
+	  font-weight: bold;
+	  text-align: center;
+	  margin: 2rem;
+	}
+
+	&_btn-yes {
+		@include modalBtn;
+	  color: #0b8f0bc7;
+	}
+
+	&_btn-no {
+		@include modalBtn;
+	  color: #fe1e72;
+	}
+}
+
+
+#modal.hidden,
+#modal-pic.hidden {
+	display: none;
+}
 
 
 /* CLASSES */
