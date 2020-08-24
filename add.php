@@ -96,8 +96,8 @@ if ( count($_POST) > 0) {
                 //On déplace le fichier dans le fichier destination
                 if(move_uploaded_file($pic_tmp_name, $pic_dest)){
                     //On stocke dans ma bdd
-                    //  $sql = $dbh->prepare('INSERT INTO pic(file_url, name) VALUES (?,?)');
-                    // $sql->execute(array($pic_name, $pic_dest));
+                     $queryp = $dbh->prepare('INSERT INTO pic(file_url, name) VALUES (?,?)');
+                    $queryp->execute(array($pic_name, $pic_dest));
                     echo 'Fichier envoyé avec succès';
                 }else{
                     echo 'Une erreur est survenue lors de lenvoi du fichier';
@@ -121,14 +121,14 @@ if ( count($_POST) > 0) {
                 //On déplace le fichier dans le fichier destination
                 if(move_uploaded_file($man_tmp_name, $man_dest)){
                     //On stocke dans ma bdd
-                    //  $sql = $dbh->prepare('INSERT INTO manu(man_url, name ) VALUES (?,?)');
-                    // $sql->execute(array($man_name, $man_dest));
+                     $query = $dbh->prepare('INSERT INTO manu(man_url, name) VALUES (?,?)');
+                    $query->execute(array($man_name, $man_dest));
                     echo 'Fichier envoyé avec succès';
                 }else{
                     echo 'Une erreur est survenue lors de l\'envoi du fichier';
                 }
             }else{
-                echo 'Seuls les fichiers .pdf, et .TXT sont autorisés';
+                echo 'Seuls les fichiers .pdf, .jpeg et .png sont autorisés';
             }
         }
         
@@ -138,7 +138,7 @@ if ( count($_POST) > 0) {
     // if every field is filled
     if( $error === false){
         // prepare sql request
-        $sql = "INSERT INTO `achat_materiel`( `location`, `name_product`, `ref_product`, `categories`, `purchase_date`, `garanty_date`, `price`, `advice`), `pic.name`, `manu.name` VALUES (:location, :name_product, :ref_product, :categories, :purchase_date, :garanty_date, :price, :advice, :picture, :manual)";
+        $sql = "INSERT INTO `achat_materiel`( `location`, `name_product`, `ref_product`, `categories`, `purchase_date`, `garanty_date`, `price`, `advice`, `picture`, `manual`)VALUES (:location, :name_product, :ref_product, :categories, :purchase_date, :garanty_date, :price, :advice, :picture, :manual)";
     }
 
     // prepare named parameters
@@ -151,8 +151,8 @@ if ( count($_POST) > 0) {
     $sth->bindValue(':garanty_date', strftime("%Y-%m-%d", strtotime($garanty_date)), PDO::PARAM_STR);
     $sth->bindParam(':price', $price, PDO::PARAM_STR);
     $sth->bindParam(':advice', $advice, PDO::PARAM_STR);
-    $sth->bindParam(':picture', $pic_name, PDO::PARAM_STR);
-    $sth->bindParam(':manual', $man_name, PDO::PARAM_STR);
+    $sth->bindParam(':picture', $pic_dest, PDO::PARAM_STR);
+    $sth->bindParam(':manual', $man_dest, PDO::PARAM_STR);
 
 
     // and ute
