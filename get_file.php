@@ -25,26 +25,16 @@ if (isset($_GET['id'])) {
 	// even if everything is ok, we still check if file exist
 	if (file_exists($file_location)) {
 
-		var_dump($file_location);
-		// if yes -> base64 decode
-		// check resolution
-		// if not adapted, resize keeping ratio width/height
-		//
-		// For base64, adapt the header
-		//header("Content-type: image/gif");
-		// and display datas
-		//$data = "";
-		$datas = "VEVTVA==";
-		echo base64_decode($datas);
+		// if yes
+		// For base64
+		//$datas = base64_decode($file_location);
+		//echo base64_decode($datas);
+		// if b64:
+		// echo '<img src="data:base64,' . $data . '" />';
 
 		// If no base64 :
-		/*echo "<img src=\"$file_location\">";*/
+		echo "$file_location";
 	} else {
 		die("Error");
 	}
-
-
-
 }
-
-?>
