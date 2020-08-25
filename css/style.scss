@@ -64,7 +64,7 @@ input:focus,
 	opacity: 1;
 }
 
-/* remove horrible placeholder for file inputq */
+/* remove horrible placeholder for file inputs */
 input[type="file"]{
 	color: transparent;
 }
@@ -360,6 +360,18 @@ button > a, #logout {
 #add-btn-container {
 	@include flexAlignItemsCenter;
 	@include flexJustifyContentFlexEnd;
+}
+
+#modal-pic_div {
+	width: 100%;
+	height: 100%;
+}
+
+// Make Product img fit in window
+#productImg {
+	height: 100%;
+	width: 100%;
+	object-fit: contain;
 }
 
 
