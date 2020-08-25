@@ -184,9 +184,9 @@ if ( count($_POST) > 0) {
         $sth->bindParam(':advice', $advice, PDO::PARAM_STR);
         $sth->bindParam(':picture', $picId, PDO::PARAM_INT);
         $sth->bindParam(':manual', $manId, PDO::PARAM_INT);
-
+        
         // and ute
-
+        $sth->execute(); 
     }
     // Redirection if done
     header('Location: ./index.php');
