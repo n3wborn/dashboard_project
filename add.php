@@ -28,6 +28,25 @@ if ( count($_POST) > 0) {
     
     if (strlen(trim($_POST['location']))!== 0){
         $location = trim($_POST['location']);
+        $sql= "SELECT id FROM sites WHERE name =:location" ;
+        $sth = $dbh->prepare($sql);
+        $sth->bindParam(':location', $location, PDO::PARAM_INT);
+        $sth->execute();
+        $result = $sth->fetchAll();
+        if(isset($result[0])){
+            $locId = $result[0]["id"];
+        }else{
+            $sql2 = "INSERT INTO `sites` (`name`) VALUES (:location)";
+            $sth = $dbh->prepare($sql2);
+            $sth->bindParam(':location', $location, PDO::PARAM_INT);
+            $sth->execute();
+            $sql= "SELECT id FROM sites WHERE name =:location" ;
+            $sth = $dbh->prepare($sql);
+            $sth->bindParam(':location', $location, PDO::PARAM_INT);
+            $sth->execute();
+            $result = $sth->fetchAll();
+            $locId = $result[0]["id"];
+        }
     }
     else{
         $error = true;
@@ -97,7 +116,7 @@ if ( count($_POST) > 0) {
                 if(move_uploaded_file($pic_tmp_name, $pic_dest)){
                     //On stocke dans ma bdd
                      $queryp = $dbh->prepare('INSERT INTO pic(file_url, name) VALUES (?,?)');
-                    $queryp->execute(array($pic_name, $pic_dest));
+                    $queryp->execute(array($pic_dest, $pic_name ));
                     echo 'Fichier envoyé avec succès';
                 }else{
                     echo 'Une erreur est survenue lors de lenvoi du fichier';
@@ -122,7 +141,7 @@ if ( count($_POST) > 0) {
                 if(move_uploaded_file($man_tmp_name, $man_dest)){
                     //On stocke dans ma bdd
                      $query = $dbh->prepare('INSERT INTO manu(man_url, name) VALUES (?,?)');
-                    $query->execute(array($man_name, $man_dest));
+                    $query->execute(array($man_dest, $man_name));
                     echo 'Fichier envoyé avec succès';
                 }else{
                     echo 'Une erreur est survenue lors de l\'envoi du fichier';
@@ -132,32 +151,43 @@ if ( count($_POST) > 0) {
             }
         }
         
+        $sql= "SELECT id FROM pic WHERE file_url =:picture AND name=:name; " ;
+        $sth = $dbh->prepare($sql);
+        $sth->bindParam(':picture', $pic_dest, PDO::PARAM_STR);
+        $sth->bindParam(':name', $pic_name, PDO::PARAM_STR);
+        $sth->execute();
+        $result = $sth->fetchAll();
+        $picId = $result[0]["id"];
         
-
+        $sql2 = "SELECT id FROM manu WHERE man_url =:manual AND name=:name; " ;
+        $sth = $dbh->prepare($sql2);
+        $sth->bindParam(':manual', $man_dest, PDO::PARAM_STR);
+        $sth->bindParam(':name', $man_name, PDO::PARAM_STR);
+        $sth->execute();
+        $result = $sth->fetchAll();
+        $manId = $result[0]["id"];
 
     // if every field is filled
     if( $error === false){
         // prepare sql request
         $sql = "INSERT INTO `achat_materiel`( `location`, `name_product`, `ref_product`, `categories`, `purchase_date`, `garanty_date`, `price`, `advice`, `picture`, `manual`)VALUES (:location, :name_product, :ref_product, :categories, :purchase_date, :garanty_date, :price, :advice, :picture, :manual)";
+        
+        // prepare named parameters
+        $sth = $dbh->prepare($sql);
+        $sth->bindParam(':location', $locId, PDO::PARAM_INT);
+        $sth->bindParam(':name_product', $name_product, PDO::PARAM_STR);
+        $sth->bindParam(':ref_product', $ref_product, PDO::PARAM_STR);
+        $sth->bindParam(':categories', $categories, PDO::PARAM_INT);
+        $sth->bindValue(':purchase_date', strftime("%Y-%m-%d", strtotime($purchase_date)), PDO::PARAM_STR);
+        $sth->bindValue(':garanty_date', strftime("%Y-%m-%d", strtotime($garanty_date)), PDO::PARAM_STR);
+        $sth->bindParam(':price', $price, PDO::PARAM_STR);
+        $sth->bindParam(':advice', $advice, PDO::PARAM_STR);
+        $sth->bindParam(':picture', $picId, PDO::PARAM_INT);
+        $sth->bindParam(':manual', $manId, PDO::PARAM_INT);
+
+        // and ute
+
     }
-
-    // prepare named parameters
-    $sth = $dbh->prepare($sql);
-    $sth->bindParam(':location', $location, PDO::PARAM_STR);
-    $sth->bindParam(':name_product', $name_product, PDO::PARAM_STR);
-    $sth->bindParam(':ref_product', $ref_product, PDO::PARAM_STR);
-    $sth->bindParam(':categories', $categories, PDO::PARAM_STR);
-    $sth->bindValue(':purchase_date', strftime("%Y-%m-%d", strtotime($purchase_date)), PDO::PARAM_STR);
-    $sth->bindValue(':garanty_date', strftime("%Y-%m-%d", strtotime($garanty_date)), PDO::PARAM_STR);
-    $sth->bindParam(':price', $price, PDO::PARAM_STR);
-    $sth->bindParam(':advice', $advice, PDO::PARAM_STR);
-    $sth->bindParam(':picture', $pic_dest, PDO::PARAM_STR);
-    $sth->bindParam(':manual', $man_dest, PDO::PARAM_STR);
-
-
-    // and ute
-    $sth->execute();
-
     // Redirection if done
     header('Location: ./index.php');
 }
