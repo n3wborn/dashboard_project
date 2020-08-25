@@ -116,7 +116,7 @@ if ( count($_POST) > 0) {
                 if(move_uploaded_file($pic_tmp_name, $pic_dest)){
                     //On stocke dans ma bdd
                      $queryp = $dbh->prepare('INSERT INTO pic(file_url, name) VALUES (?,?)');
-                    $queryp->execute(array($pic_dest, $pic_name ));
+                    $queryp->execute(array($pic_name, $pic_dest ));
                     echo 'Fichier envoyé avec succès';
                 }else{
                     echo 'Une erreur est survenue lors de lenvoi du fichier';
@@ -141,7 +141,7 @@ if ( count($_POST) > 0) {
                 if(move_uploaded_file($man_tmp_name, $man_dest)){
                     //On stocke dans ma bdd
                      $query = $dbh->prepare('INSERT INTO manu(man_url, name) VALUES (?,?)');
-                    $query->execute(array($man_dest, $man_name));
+                    $query->execute(array($man_name, $man_dest));
                     echo 'Fichier envoyé avec succès';
                 }else{
                     echo 'Une erreur est survenue lors de l\'envoi du fichier';
