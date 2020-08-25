@@ -64,6 +64,13 @@ input:focus,
 	opacity: 1;
 }
 
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	box-sizing: content-box;
+}
+
 /* remove horrible placeholder for file inputs */
 input[type="file"]{
 	color: transparent;
@@ -260,12 +267,6 @@ form {
 		min-width: 250px;
 	  font-weight: bold;
 	}
-
-	select {
-		box-sizing: content-box;
-		appearance: none;
-	}
-
 }
 
 
