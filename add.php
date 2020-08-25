@@ -153,16 +153,16 @@ if ( count($_POST) > 0) {
         
         $sql= "SELECT id FROM pic WHERE file_url =:picture AND name=:name; " ;
         $sth = $dbh->prepare($sql);
-        $sth->bindParam(':picture', $pic_dest, PDO::PARAM_STR);
-        $sth->bindParam(':name', $pic_name, PDO::PARAM_STR);
+        $sth->bindParam(':picture', $pic_name, PDO::PARAM_STR);
+        $sth->bindParam(':name', $pic_dest, PDO::PARAM_STR);
         $sth->execute();
         $result = $sth->fetchAll();
         $picId = $result[0]["id"];
         
         $sql2 = "SELECT id FROM manu WHERE man_url =:manual AND name=:name; " ;
         $sth = $dbh->prepare($sql2);
-        $sth->bindParam(':manual', $man_dest, PDO::PARAM_STR);
-        $sth->bindParam(':name', $man_name, PDO::PARAM_STR);
+        $sth->bindParam(':manual', $man_name, PDO::PARAM_STR);
+        $sth->bindParam(':name', $man_dest, PDO::PARAM_STR);
         $sth->execute();
         $result = $sth->fetchAll();
         $manId = $result[0]["id"];
