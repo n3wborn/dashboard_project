@@ -10,7 +10,7 @@ const modal = document.getElementById('modal');
 // Used to toggle readyToDelete class
 function removeReadyToDelete() {
 	const elementsToDelete = document.getElementsByClassName('readyToDelete')
-	for (elementToDelete of elementsToDelete) {
+	for (let elementToDelete of elementsToDelete) {
 		elementToDelete.classList.toggle('readyToDelete')
 	}
 }
@@ -30,7 +30,7 @@ function showFile(src, width, height, alt) {
 
 // Keep an eye on delete links
 // if click, show modal and permit element deletion
-for (deleteLink of deleteLinks) {
+for (let deleteLink of deleteLinks) {
 	deleteLink.addEventListener('click', function(e){
 		e.preventDefault();
 		modal.classList.toggle('hidden');
@@ -62,7 +62,7 @@ modal.addEventListener('click', function() {
 yesBtn.addEventListener('click', function() {
 	const elementsToDelete = document.getElementsByClassName('readyToDelete')
 
-	for (elementToDelete of elementsToDelete) {
+	for (let elementToDelete of elementsToDelete) {
 		location.href = elementToDelete.getAttribute('href');
 	}
 })
