@@ -80,19 +80,20 @@ const picLinks = document.getElementsByClassName('picLinks');
 // show a full width/height modal
 // check size (and resize if needed keeping ratio)
 // display the image in the modal
-for (manLink of manLinks) {
+for (let manLink of manLinks) {
 	manLink.addEventListener('click', function(e) {
+		e.preventDefault();
+		console.log(manLink);
 		console.log(e);
 	})
 }
-
 
 // Keep an eye on pictures links
 // show a full width/height modal
 // check size (and resize if needed keeping ratio)
 // display the image in the modal
-for (picLink of picLinks) {
-	picLink.addEventListener('click', function(e) {
+	for (let link of picLinks) {
+	link.addEventListener('click', function(e) {
 		e.preventDefault();
 
 		// show modal
@@ -103,7 +104,8 @@ for (picLink of picLinks) {
 		let img = document.createElement('IMG');
 
 		let xhr = new XMLHttpRequest();
-		xhr.open("GET", picLink, true);
+		xhr.open("GET", link.href, true);
+		console.log("href -> ", link.href);
 
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === 4 && xhr.status == "200") {

@@ -9,7 +9,7 @@ if (!connected()) {
 
 if (isset($_GET['id'])) {
 	// sql request to be executed
-	$sql='SELECT achat_materiel.picture AS pic, pic.picture AS path FROM achat_materiel INNER JOIN pic ON pic.id WHERE achat_materiel.ID=:id';
+	$sql='SELECT achat_materiel.id AS achat_ID, pic.name AS path FROM pic INNER JOIN achat_materiel ON achat_materiel.picture = pic.id WHERE achat_materiel.id=:id';
 
 	// prepare and execute
 	$sth = $dbh->prepare( $sql );
