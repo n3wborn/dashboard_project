@@ -4,13 +4,15 @@ services:
 
   php-apache:
     image: webdevops/php-apache
+    links:
+      - "mariadb"
     ports:
       - 8080:80
     environment:
       - PMA_ARBITRARY=1
       - PHP_DISPLAY_ERRORS=On
     volumes:
-      - "../dashboard_project:/app"
+      - "./:/app:z"
 
     depends_on:
       - mariadb
@@ -18,19 +20,24 @@ services:
 
   mariadb:
     image: mariadb:10.4
-    restart: always
+    ports:
+      - 3306:3306
     volumes:
-      - dashboard_project-data:/var/lib/mysql
+      - dashboard_project-data:/var/lib/mysql:z
     environment:
-      MYSQL_ROOT_PASSWORD: mariadb
+      - MYSQL_ROOT_PASSWORD=mariadb
+    restart: always
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
+    links:
+      - "mariadb"
     ports:
       - 8081:80
     environment:
       - PMA_ARBITRARY=1
-      - PMA_HOST=mariadb
+      - MYSQL_USERNAME=root
+      - MYSQL_ROOT_PASSWORD=mariadb
     depends_on:
       - mariadb
 
