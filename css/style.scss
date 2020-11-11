@@ -158,12 +158,12 @@ $maxwidth: 1540px;
 body {
 	@include font;
 	box-sizing: border-box;
+	max-width: 100%;
 }
 
 header {
 	@include flex;
 	@include flexSpaceAround;
-	padding: 1rem 0;
 	background-color: #363a46;
 
 	nav {
@@ -332,7 +332,6 @@ button > a, #logout {
 		width: 100%;
 
 		input {
-			width: 100%;
 			min-width: 250px;
 			max-width: 450px;
 			border-color: 1px solid #007ea7;
@@ -486,5 +485,9 @@ button > a, #logout {
 
 	header > nav > ul {
 		justify-content: flex-end;
+	}
+
+	#input_user, #input_password {
+		width: 80vw;
 	}
 }
