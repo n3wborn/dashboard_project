@@ -4,42 +4,42 @@ services:
 
   php-apache:
     image: webdevops/php-apache
+    container_name: dashboard-srv
     links:
       - "mariadb"
     ports:
       - 8080:80
     environment:
-      - PMA_ARBITRARY=1
       - PHP_DISPLAY_ERRORS=On
     volumes:
       - "./:/app:z"
-
     depends_on:
       - mariadb
-      - phpmyadmin
+
 
   mariadb:
     image: mariadb:10.4
+    container_name: dashboard-db
     ports:
       - 3306:3306
     volumes:
       - dashboard_project-data:/var/lib/mysql:z
     environment:
       - MYSQL_ROOT_PASSWORD=mariadb
-    restart: always
+    restart: unless-stopped
+
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
-    links:
-      - "mariadb"
+    container_name: dashboard-pma
     ports:
       - 8081:80
     environment:
-      - PMA_ARBITRARY=1
-      - MYSQL_USERNAME=root
+      - PMA_HOST=mariadb
       - MYSQL_ROOT_PASSWORD=mariadb
     depends_on:
       - mariadb
+    restart: unless-stopped
 
 volumes:
   dashboard_project-data:
