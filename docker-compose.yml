@@ -5,8 +5,6 @@ services:
   php-apache:
     image: webdevops/php-apache
     container_name: dashboard-srv
-    links:
-      - "mariadb"
     ports:
       - 8080:80
     environment:
